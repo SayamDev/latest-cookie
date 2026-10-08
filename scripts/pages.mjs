@@ -13,6 +13,7 @@ const escape = (s) =>
       ],
   );
 const routes = [
+  "models",
   "saved",
   "briefings",
   "community",
@@ -23,9 +24,11 @@ for (const route of routes) {
   const story = stories.find((s) => route === "stories/" + s.slug);
   let html = template.replace(
     "<title>Latest Cookie</title>",
-    `<title>${escape(story?.title || route.charAt(0).toUpperCase() + route.slice(1))} · Latest Cookie</title>`,
+    `<title>${escape(story?.title || (route === "models" ? "Model Lab" : route.charAt(0).toUpperCase() + route.slice(1)))} · Latest Cookie</title>`,
   );
-  const title = story?.title || "Latest Cookie";
+  const title =
+    story?.title ||
+    (route === "models" ? "Model Lab · Latest Cookie" : "Latest Cookie");
   const description =
     story?.summary ||
     "Independent technology news, useful context, and a place for curious people.";

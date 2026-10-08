@@ -11,7 +11,7 @@ Delegated: React and TypeScript with static publication pages, a small client-si
 Developers, makers, open-source contributors and curious technology readers who want useful information immediately.
 
 ## Product Purpose
-A free public tech publication and gathering place with source-linked news, search, topic filters, browser-local bookmarks, briefings and a community directory.
+A free public tech publication and gathering place with source-linked news, search, topic filters, browser-local bookmarks, briefings a community directory, and a source-linked model comparison lab.
 
 ## Brand Commitments
 Latest Cookie. Unique, techy, no generic AI-generated design or filler. Useful content on the first screen.

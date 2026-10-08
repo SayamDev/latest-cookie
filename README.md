@@ -31,3 +31,9 @@ No analytics, advertising or login for reading. Bookmarks and theme use localSto
 ## Contribute
 
 See CONTRIBUTING.md, COMMUNITY.md and ACCESSIBILITY.md. Code is MIT licensed. Original linked articles remain the property of their publishers.
+
+## Model Lab
+
+`/models/` offers filters, price charts, a text-token cost calculator and comparisons of up to three models. Share this view creates a URL containing filters, selections and token volumes. Six manually checked models launch the catalogue, including earlier GPT-4.1 options; this is not an exhaustive latest-model leaderboard.
+
+Edit `src/data/models.json` only after checking the linked first-party specifications and pricing. Preserve the distinction between shared context and input limits. Rates use USD per million uncached text tokens on the standard paid tier. Cost estimates exclude tools, caching, special service tiers, taxes and regional modifiers. Refresh dates only after checking the sources. Build validates entries; `src/lib/models.test.ts` tests validation and calculation. No Artificial Analysis benchmark data is copied or integrated.

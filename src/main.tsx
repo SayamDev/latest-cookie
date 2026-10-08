@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import "@fontsource/barlow-condensed/800.css";
 import "@fontsource-variable/dm-sans";
+import ModelsPage from "./features/models/ModelsPage";
 import rawStories from "./data/stories.json";
 import briefings from "./data/briefings.json";
 import {
@@ -261,6 +262,12 @@ function App() {
         <div>
           <a href={href()} aria-current={isHome ? "page" : undefined}>
             Latest
+          </a>
+          <a
+            href={href("models/")}
+            aria-current={path === "models" ? "page" : undefined}
+          >
+            Model Lab
           </a>
           <a
             href={href("briefings/")}
@@ -676,6 +683,8 @@ function App() {
                 </a>
               </div>
             </section>
+          ) : path === "models" ? (
+            <ModelsPage />
           ) : path === "about" ? (
             <section className="about-page">
               <div className="page-intro">
@@ -772,6 +781,7 @@ function App() {
             <nav aria-label="Explore">
               <a href={href()}>Latest stories</a>
               <a href={href("saved/")}>Saved stories</a>
+              <a href={href("models/")}>Model Lab</a>
               <a href={href("community/")}>Community</a>
             </nav>
             <nav aria-label="Publication information">
