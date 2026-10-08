@@ -1,3 +1,4 @@
+import { ArtHeading, SectionArt } from "./components/SectionArt";
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -64,6 +65,26 @@ function Cookie() {
   );
 }
 function App() {
+  const [artwork, setArtwork] = useState(() => {
+    try {
+      return localStorage.getItem("latest-cookie-artwork") !== "original";
+    } catch {
+      return true;
+    }
+  });
+  useEffect(() => {
+    document.documentElement.dataset.artwork = artwork
+      ? "illustrated"
+      : "original";
+    try {
+      localStorage.setItem(
+        "latest-cookie-artwork",
+        artwork ? "illustrated" : "original",
+      );
+    } catch {
+      /* Preference remains available for this visit. */
+    }
+  }, [artwork]);
   const [dailyData, setDailyData] = useState(daily);
   const [stories, setStories] = useState(() => validateStories(rawStories));
   const path = decodeURI(location.pathname)
@@ -377,7 +398,7 @@ function App() {
             <>
               {isSaved && (
                 <div className="page-intro">
-                  <h1>YOUR COOKIE JAR.</h1>
+                  <ArtHeading kind="jar">YOUR COOKIE JAR.</ArtHeading>
                   <p>Good reads, kept for later. Saved only in this browser.</p>
                   {saved.length > 0 && (
                     <button className="text-button" onClick={clear}>
@@ -440,7 +461,8 @@ function App() {
                       </h2>
                       {saved.length === 0 ? (
                         <div className="jar-empty">
-                          <Bookmark size={30} />
+                          <SectionArt kind="jar" className="rail-jar-art" />
+                          <Bookmark className="original-empty-icon" size={30} />
                           <h3>Found a good one?</h3>
                           <p>
                             Tap the bookmark on any story. We’ll keep it here
@@ -508,7 +530,14 @@ function App() {
               </div>
               {filtered.length === 0 ? (
                 <div className="empty-state">
-                  <Search size={32} />
+                  {isSaved && !saved.length ? (
+                    <>
+                      <SectionArt kind="jar" className="empty-jar-art" />
+                      <Search className="original-empty-icon" size={32} />
+                    </>
+                  ) : (
+                    <Search size={32} />
+                  )}
                   <h2>
                     {isSaved && !saved.length
                       ? "Your jar is empty."
@@ -622,7 +651,7 @@ function App() {
             <section className="briefing-page">
               <div className="page-intro">
                 <span className="topic-label">The weekly bite</span>
-                <h1>{briefings[0].title}</h1>
+                <ArtHeading kind="weekly">{briefings[0].title}</ArtHeading>
                 <p>{briefings[0].description}</p>
                 <div className="briefing-meta">
                   <time dateTime={briefings[0].date}>
@@ -650,11 +679,11 @@ function App() {
           ) : path === "community" ? (
             <section className="community-page">
               <div className="page-intro">
-                <h1>
+                <ArtHeading kind="community">
                   GOOD TECH.
                   <br />
                   BETTER COMPANY.
-                </h1>
+                </ArtHeading>
                 <p>
                   For the people who open the docs, follow the rabbit hole, and
                   share what they find.
@@ -720,11 +749,11 @@ function App() {
           ) : path === "about" ? (
             <section className="about-page">
               <div className="page-intro">
-                <h1>
+                <ArtHeading kind="about">
                   STAY CURIOUS.
                   <br />
                   SKIP THE FILLER.
-                </h1>
+                </ArtHeading>
                 <p>
                   Latest Cookie is an independent corner of the web for people
                   who care about how technology actually works.
@@ -831,13 +860,28 @@ function App() {
             </nav>
           </div>
           <img
-            className="footer-art"
+            className="footer-art original-footer-art"
             src={href("art/radial-art.jpg")}
             alt=""
             width="214"
             height="143"
             loading="lazy"
           />
+          <SectionArt kind="footer" className="new-footer-art" />
+        </div>
+        <div className="artwork-preference">
+          <label htmlFor="artwork-preference">Artwork</label>
+          <select
+            id="artwork-preference"
+            value={artwork ? "illustrated" : "original"}
+            onChange={(e) => setArtwork(e.target.value === "illustrated")}
+          >
+            <option value="illustrated">Illustrated</option>
+            <option value="original">Original design</option>
+          </select>
+          <span>
+            Choose the previous design anytime. Saved in this browser.
+          </span>
         </div>
         <div className="colophon">
           <span>Latest Cookie · Made for curious people.</span>

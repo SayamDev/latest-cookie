@@ -1,3 +1,4 @@
+import { ArtHeading } from "../../components/SectionArt";
 import { useState } from "react";
 import { ArrowUpRight, Play, RefreshCw } from "lucide-react";
 import initial from "../../data/daily.json";
@@ -148,7 +149,9 @@ export default function DailyPages({ kind }: { kind: "news" | "videos" }) {
     <section className="daily-page">
       <header className="lab-intro">
         <div>
-          <h1>{video ? "PRESS PLAY." : "THE NEWS DESK."}</h1>
+          <ArtHeading kind={video ? "watch" : "news"}>
+            {video ? "PRESS PLAY." : "THE NEWS DESK."}
+          </ArtHeading>
           <p>
             {video
               ? "Good tech. Worth watching."

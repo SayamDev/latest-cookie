@@ -1,3 +1,4 @@
+import { ArtHeading } from "../../components/SectionArt";
 import { useState } from "react";
 import { ArrowUpRight, Check, Link, Plus, X } from "lucide-react";
 import { daily, stamp, FreshnessNotice } from "../daily/DailyPages";
@@ -134,9 +135,9 @@ export default function ModelsPage() {
     <section className="model-lab" aria-labelledby="model-title">
       <header className="lab-intro">
         <div>
-          <h1 id="model-title">
-            MODEL LAB<span>.</span>
-          </h1>
+          <ArtHeading kind="models" id="model-title">
+            MODEL LAB.
+          </ArtHeading>
           <p>Know the trade-offs. Then build.</p>
         </div>
         <div className="lab-edition">
