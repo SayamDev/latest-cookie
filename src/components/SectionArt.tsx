@@ -8,16 +8,28 @@ export type ArtKind =
   | "community"
   | "jar"
   | "footer";
-const kinds: ArtKind[] = [
-  "news",
-  "watch",
-  "models",
-  "weekly",
-  "about",
-  "community",
-  "jar",
-  "footer",
-];
+// Display the exact approved boards through bounded CSS windows; no regenerated art.
+const crops: Record<
+  ArtKind,
+  [string, number, number, number, number, number, number]
+> = {
+  news: ["approved-news-watch-models.jpg", 1536, 1024, 830, 55, 670, 295],
+  watch: ["approved-news-watch-models.jpg", 1536, 1024, 817, 378, 690, 295],
+  models: ["approved-news-watch-models.jpg", 1536, 1024, 825, 697, 670, 310],
+  weekly: ["approved-weekly-community-jar.jpg", 1024, 1536, 520, 60, 465, 343],
+  about: ["approved-weekly-community-jar.jpg", 1024, 1536, 512, 427, 475, 320],
+  community: [
+    "approved-weekly-community-jar.jpg",
+    1024,
+    1536,
+    510,
+    769,
+    478,
+    299,
+  ],
+  jar: ["approved-weekly-community-jar.jpg", 1024, 1536, 496, 1086, 488, 401],
+  footer: ["approved-home-footer.jpg", 1536, 1024, 397, 885, 788, 113],
+};
 export function SectionArt({
   kind,
   className = "",
@@ -25,14 +37,16 @@ export function SectionArt({
   kind: ArtKind;
   className?: string;
 }) {
-  const index = kinds.indexOf(kind);
+  const [file, width, height, x, y, cropWidth, cropHeight] = crops[kind];
   return (
     <span
       aria-hidden="true"
       className={`section-art ${className}`}
       style={{
-        backgroundImage: `url(${import.meta.env.BASE_URL}art/section-artwork.jpg)`,
-        backgroundPosition: `${((index % 4) * 100) / 3}% ${index < 4 ? 0 : 100}%`,
+        backgroundImage: `url(${import.meta.env.BASE_URL}art/${file})`,
+        backgroundSize: `${(width / cropWidth) * 100}% ${(height / cropHeight) * 100}%`,
+        backgroundPosition: `${(x / (width - cropWidth)) * 100}% ${(y / (height - cropHeight)) * 100}%`,
+        aspectRatio: `${cropWidth} / ${cropHeight}`,
       }}
     />
   );

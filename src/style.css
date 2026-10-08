@@ -1543,3 +1543,6 @@ html[data-artwork="original"] .model-lab .title-dot {
   mix-blend-mode: normal;
   margin-bottom: 8px;
 }
+.community-page .section-art {
+  mix-blend-mode: normal;
+}
