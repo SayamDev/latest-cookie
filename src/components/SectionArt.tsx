@@ -6,13 +6,15 @@ export type ArtKind =
   | "weekly"
   | "about"
   | "community"
+  | "jar-full"
   | "jar"
   | "footer";
-// Display the exact approved boards through bounded CSS windows; no regenerated art.
+// Exact approved board crops, plus the requested full-jar illustration.
 const crops: Record<
   ArtKind,
   [string, number, number, number, number, number, number]
 > = {
+  "jar-full": ["full-cookie-jar.jpg", 900, 720, 0, 0, 900, 720],
   news: ["approved-news-watch-models.jpg", 1536, 1024, 830, 55, 670, 295],
   watch: ["approved-news-watch-models.jpg", 1536, 1024, 817, 378, 690, 295],
   models: ["approved-news-watch-models.jpg", 1536, 1024, 825, 697, 670, 310],
@@ -63,10 +65,11 @@ export function SectionArt({
     <span
       aria-hidden="true"
       className={`section-art ${className}`}
+      data-art={kind}
       style={{
         backgroundImage: `url(${import.meta.env.BASE_URL}art/${file})`,
         backgroundSize: `${(width / cropWidth) * 100}% ${(height / cropHeight) * 100}%`,
-        backgroundPosition: `${(x / (width - cropWidth)) * 100}% ${(y / (height - cropHeight)) * 100}%`,
+        backgroundPosition: `${width === cropWidth ? 0 : (x / (width - cropWidth)) * 100}% ${height === cropHeight ? 0 : (y / (height - cropHeight)) * 100}%`,
         aspectRatio: `${cropWidth} / ${cropHeight}`,
       }}
     />

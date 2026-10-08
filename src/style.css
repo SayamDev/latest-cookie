@@ -1460,7 +1460,7 @@ html[data-theme="dark"] .footer-art {
 .section-art {
   display: inline-block;
   flex: 0 0 auto;
-  width: clamp(90px, 12vw, 170px);
+  width: clamp(150px, 19vw, 270px);
   aspect-ratio: 1;
   background-size: 400% 200%;
   background-repeat: no-repeat;
@@ -1473,7 +1473,7 @@ html[data-theme="dark"] .footer-art {
   min-width: 0;
 }
 .empty-jar-art {
-  width: 160px;
+  width: 220px;
   margin-bottom: 16px;
 }
 .original-empty-icon,
@@ -1532,7 +1532,7 @@ html[data-artwork="original"] .model-lab .title-dot {
     gap: 16px;
   }
   .art-heading .section-art {
-    width: 76px;
+    width: 105px;
   }
   .new-footer-art {
     max-width: 200px;
@@ -1555,4 +1555,24 @@ html[data-artwork="original"] .model-lab .title-dot {
 html[data-theme="dark"] .section-art,
 .bookmarks .section-art {
   filter: url(#artwork-paper-key) invert(0.88) hue-rotate(180deg);
+}
+
+.chew-cookie {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 3px;
+}
+.chew-cookie .cookie {
+  width: 26px;
+  height: 26px;
+}
+@media (min-width: 651px) and (max-width: 1100px) {
+  .art-heading .section-art {
+    width: 160px;
+  }
+}
+@media (max-width: 380px) {
+  .art-heading .section-art {
+    width: 88px;
+  }
 }

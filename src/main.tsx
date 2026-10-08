@@ -402,7 +402,7 @@ function App() {
             <>
               {isSaved && (
                 <div className="page-intro">
-                  <ArtHeading kind="jar">YOUR COOKIE JAR.</ArtHeading>
+                  <ArtHeading kind="jar-full">YOUR COOKIE JAR.</ArtHeading>
                   <p>Good reads, kept for later. Saved only in this browser.</p>
                   {saved.length > 0 && (
                     <button className="text-button" onClick={clear}>
@@ -465,8 +465,7 @@ function App() {
                       </h2>
                       {saved.length === 0 ? (
                         <div className="jar-empty">
-                          <SectionArt kind="jar" className="rail-jar-art" />
-                          <Bookmark className="original-empty-icon" size={30} />
+                          <Bookmark size={30} />
                           <h3>Found a good one?</h3>
                           <p>
                             Tap the bookmark on any story. We’ll keep it here
@@ -578,7 +577,10 @@ function App() {
                     className="button"
                     onClick={() => setLimit(filtered.length)}
                   >
-                    More to chew on <ArrowRight size={17} />
+                    <span className="chew-cookie">
+                      <Cookie />
+                    </span>
+                    More to chew on <ArrowRight size={20} aria-hidden="true" />
                   </button>
                 </div>
               )}
