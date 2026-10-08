@@ -1,0 +1,151 @@
+[
+  {
+    "id": "copilot-sandbox",
+    "slug": "copilot-local-sandboxing",
+    "title": "Your coding agent gets a boundary.",
+    "summary": "GitHub has made local sandboxing generally available across Copilot CLI, its app, and VS Code Agent Host sessions.",
+    "why": "Developers can restrict an agent’s file, network and credential access instead of giving every command the same reach as their own shell.",
+    "topic": "Security",
+    "source": "GitHub",
+    "url": "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available/",
+    "publishedAt": "2026-10-07",
+    "collectedAt": "2026-10-08",
+    "reviewStatus": "source-checked",
+    "takeaways": [
+      "Policies cover filesystem, network and credential access.",
+      "Microsoft eXecution Container translates policies into native operating-system controls.",
+      "Tool isolation is separate from model execution."
+    ],
+    "art": "sandbox"
+  },
+  {
+    "id": "local-models",
+    "slug": "copilot-local-model-discovery",
+    "title": "Local models, one less setup detour.",
+    "summary": "Copilot CLI can discover supported models from a running Ollama instance through its model picker.",
+    "why": "It makes an existing local model easier to select, but does not install Ollama, download models or automatically enable offline mode.",
+    "topic": "AI & ML",
+    "source": "GitHub",
+    "url": "https://github.blog/changelog/2026-10-07-discover-local-models-in-github-copilot-cli/",
+    "publishedAt": "2026-10-07",
+    "collectedAt": "2026-10-08",
+    "reviewStatus": "source-checked",
+    "takeaways": [
+      "Available starting in CLI version 1.0.94-0.",
+      "Models must support tool calling and streaming.",
+      "Review the provider and endpoint before adding a model."
+    ],
+    "art": "models"
+  },
+  {
+    "id": "stacked-prs",
+    "slug": "stacked-pull-requests",
+    "title": "Big changes. Smaller pull requests.",
+    "summary": "Stacked pull requests are generally available on GitHub, with improvements to rebasing, review and merging.",
+    "why": "Teams can break a large change into reviewable pieces while keeping their dependencies visible.",
+    "topic": "Developer Tools",
+    "source": "GitHub",
+    "url": "https://github.blog/changelog/2026-10-06-stacked-pull-requests-generally-available/",
+    "publishedAt": "2026-10-06",
+    "collectedAt": "2026-10-08",
+    "reviewStatus": "source-checked",
+    "takeaways": [
+      "Approvals can survive rebases when the reviewed code is unchanged.",
+      "Stack context stays visible in the pull request header.",
+      "Available on all github.com plans; Enterprise Server support is forthcoming."
+    ],
+    "art": "stack"
+  },
+  {
+    "id": "secret-scanning",
+    "slug": "secret-scanning-more-providers",
+    "title": "Secret scanning widens its net.",
+    "summary": "GitHub adds secret detectors for providers including Lovable and Supabase.",
+    "why": "New detector coverage can help surface accidentally committed credentials. Review the official list for supported token types and availability.",
+    "topic": "Security",
+    "source": "GitHub",
+    "url": "https://github.blog/changelog/2026-10-05-secret-scanning-adds-detectors-for-lovable-supabase-and-more/",
+    "publishedAt": "2026-10-05",
+    "collectedAt": "2026-10-08",
+    "reviewStatus": "source-checked",
+    "takeaways": [
+      "The announcement lists newly supported providers.",
+      "Detection is a safety net, not a replacement for keeping secrets out of source control."
+    ],
+    "art": "scan"
+  },
+  {
+    "id": "npm-stage",
+    "slug": "npm-staged-new-packages",
+    "title": "A first npm release can wait for review.",
+    "summary": "Staged publishing now supports creating new npm packages directly from automated workflows.",
+    "why": "A maintainer can review and promote the first version before anyone can install it.",
+    "topic": "Open Source",
+    "source": "npm / GitHub",
+    "url": "https://github.blog/changelog/2026-10-02-npm-staged-publishing-now-supports-creating-new-packages/",
+    "publishedAt": "2026-10-02",
+    "collectedAt": "2026-10-08",
+    "reviewStatus": "source-checked",
+    "takeaways": [
+      "Supports public scoped, public unscoped and private scoped packages.",
+      "The first version enters a staged queue.",
+      "Package settings and trusted publishing can be configured after creation."
+    ],
+    "art": "package"
+  },
+  {
+    "id": "accessibility",
+    "slug": "repository-accessibility-statements",
+    "title": "Make accessibility easier to find.",
+    "summary": "GitHub highlights accessibility statements on repository overviews.",
+    "why": "A visible statement gives users a starting point for understanding accessibility coverage and known limitations.",
+    "topic": "Open Source",
+    "source": "GitHub",
+    "url": "https://github.blog/changelog/2026-10-01-accessibility-statements-highlighted-on-repository-overview/",
+    "publishedAt": "2026-10-01",
+    "collectedAt": "2026-10-08",
+    "reviewStatus": "source-checked",
+    "takeaways": [
+      "The repository overview can surface the project’s accessibility statement.",
+      "An accessibility statement should describe actual testing and known gaps."
+    ],
+    "art": "access"
+  },
+  {
+    "id": "firefox-cadence",
+    "slug": "firefox-two-week-releases",
+    "title": "Firefox moves to a two-week rhythm.",
+    "summary": "Mozilla announced a shorter release cycle, beginning with Firefox 155 on 1 September 2026.",
+    "why": "More predictable updates aim to deliver completed fixes sooner; Mozilla says this does not mean twice as many features.",
+    "topic": "Web Development",
+    "source": "Mozilla",
+    "url": "https://blog.mozilla.org/sumo/2026/08/19/firefox-new-release-cadence-and-what-to-expect/",
+    "publishedAt": "2026-08-19",
+    "collectedAt": "2026-10-08",
+    "reviewStatus": "source-checked",
+    "takeaways": [
+      "The cadence changes from four weeks to two.",
+      "The stated aim is more predictable delivery of fixes and completed features."
+    ],
+    "art": "browser"
+  },
+  {
+    "id": "astro-six",
+    "slug": "astro-6-content-web",
+    "title": "Astro 6 puts content infrastructure first.",
+    "summary": "Astro 6 brings a built-in Fonts API, Content Security Policy support and live content collections.",
+    "why": "Content-heavy sites gain tools for self-hosted fonts and externally managed content, alongside a redesigned development server.",
+    "topic": "Web Development",
+    "source": "Astro",
+    "url": "https://astro.build/blog/astro-6/",
+    "publishedAt": "2026-03-10",
+    "collectedAt": "2026-10-08",
+    "reviewStatus": "source-checked",
+    "takeaways": [
+      "The development server uses Vite’s Environment API.",
+      "Live collections support request-time content fetching.",
+      "Node 22 or later is required."
+    ],
+    "art": "astro"
+  }
+]

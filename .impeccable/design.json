@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-08T11:52:15.460152+00:00",
+  "title": "Design System: Latest Cookie",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm paper",
+        "tonalRamp": [
+          "oklch(15% 0.014 90)",
+          "oklch(26% 0.014 90)",
+          "oklch(38% 0.014 90)",
+          "oklch(49% 0.014 90)",
+          "oklch(61% 0.014 90)",
+          "oklch(72% 0.014 90)",
+          "oklch(84% 0.014 90)",
+          "oklch(95% 0.014 90)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Near-black ink",
+        "tonalRamp": [
+          "oklch(15% 0.009 145)",
+          "oklch(26% 0.009 145)",
+          "oklch(38% 0.009 145)",
+          "oklch(49% 0.009 145)",
+          "oklch(61% 0.009 145)",
+          "oklch(72% 0.009 145)",
+          "oklch(84% 0.009 145)",
+          "oklch(95% 0.009 145)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted ink",
+        "tonalRamp": [
+          "oklch(15% 0.012 110)",
+          "oklch(26% 0.012 110)",
+          "oklch(38% 0.012 110)",
+          "oklch(49% 0.012 110)",
+          "oklch(61% 0.012 110)",
+          "oklch(72% 0.012 110)",
+          "oklch(84% 0.012 110)",
+          "oklch(95% 0.012 110)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Fine rule",
+        "tonalRamp": [
+          "oklch(15% 0.014 110)",
+          "oklch(26% 0.014 110)",
+          "oklch(38% 0.014 110)",
+          "oklch(49% 0.014 110)",
+          "oklch(61% 0.014 110)",
+          "oklch(72% 0.014 110)",
+          "oklch(84% 0.014 110)",
+          "oklch(95% 0.014 110)"
+        ]
+      },
+      "strong-rule": {
+        "role": "neutral",
+        "displayName": "Strong rule",
+        "tonalRamp": [
+          "oklch(15% 0.018 110)",
+          "oklch(26% 0.018 110)",
+          "oklch(38% 0.018 110)",
+          "oklch(49% 0.018 110)",
+          "oklch(61% 0.018 110)",
+          "oklch(72% 0.018 110)",
+          "oklch(84% 0.018 110)",
+          "oklch(95% 0.018 110)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Signal orange",
+        "tonalRamp": [
+          "oklch(15% 0.21 39)",
+          "oklch(26% 0.21 39)",
+          "oklch(38% 0.21 39)",
+          "oklch(49% 0.21 39)",
+          "oklch(61% 0.21 39)",
+          "oklch(72% 0.21 39)",
+          "oklch(84% 0.21 39)",
+          "oklch(95% 0.21 39)"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Soft orange",
+        "tonalRamp": [
+          "oklch(15% 0.16 43)",
+          "oklch(26% 0.16 43)",
+          "oklch(38% 0.16 43)",
+          "oklch(49% 0.16 43)",
+          "oklch(61% 0.16 43)",
+          "oklch(72% 0.16 43)",
+          "oklch(84% 0.16 43)",
+          "oklch(95% 0.16 43)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Inset paper",
+        "tonalRamp": [
+          "oklch(15% 0.015 95)",
+          "oklch(26% 0.015 95)",
+          "oklch(38% 0.015 95)",
+          "oklch(49% 0.015 95)",
+          "oklch(61% 0.015 95)",
+          "oklch(72% 0.015 95)",
+          "oklch(84% 0.015 95)",
+          "oklch(95% 0.015 95)"
+        ]
+      },
+      "reading-list": {
+        "role": "neutral",
+        "displayName": "Reading-list ink",
+        "tonalRamp": [
+          "oklch(15% 0.012 130)",
+          "oklch(26% 0.012 130)",
+          "oklch(38% 0.012 130)",
+          "oklch(49% 0.012 130)",
+          "oklch(61% 0.012 130)",
+          "oklch(72% 0.012 130)",
+          "oklch(84% 0.012 130)",
+          "oklch(95% 0.012 130)"
+        ]
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Dark-mode muted text",
+        "tonalRamp": [
+          "oklch(15% 0.02 115)",
+          "oklch(26% 0.02 115)",
+          "oklch(38% 0.02 115)",
+          "oklch(49% 0.02 115)",
+          "oklch(61% 0.02 115)",
+          "oklch(72% 0.02 115)",
+          "oklch(84% 0.02 115)",
+          "oklch(95% 0.02 115)"
+        ]
+      },
+      "dark-rule": {
+        "role": "neutral",
+        "displayName": "Dark-mode fine rule",
+        "tonalRamp": [
+          "oklch(15% 0.02 130)",
+          "oklch(26% 0.02 130)",
+          "oklch(38% 0.02 130)",
+          "oklch(49% 0.02 130)",
+          "oklch(61% 0.02 130)",
+          "oklch(72% 0.02 130)",
+          "oklch(84% 0.02 130)",
+          "oklch(95% 0.02 130)"
+        ]
+      },
+      "dark-strong-rule": {
+        "role": "neutral",
+        "displayName": "Dark-mode strong rule",
+        "tonalRamp": [
+          "oklch(15% 0.025 120)",
+          "oklch(26% 0.025 120)",
+          "oklch(38% 0.025 120)",
+          "oklch(49% 0.025 120)",
+          "oklch(61% 0.025 120)",
+          "oklch(72% 0.025 120)",
+          "oklch(84% 0.025 120)",
+          "oklch(95% 0.025 120)"
+        ]
+      },
+      "dark-panel": {
+        "role": "neutral",
+        "displayName": "Dark-mode inset",
+        "tonalRamp": [
+          "oklch(15% 0.016 130)",
+          "oklch(26% 0.016 130)",
+          "oklch(38% 0.016 130)",
+          "oklch(49% 0.016 130)",
+          "oklch(61% 0.016 130)",
+          "oklch(72% 0.016 130)",
+          "oklch(84% 0.016 130)",
+          "oklch(95% 0.016 130)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Condensed display",
+        "purpose": "Masthead."
+      },
+      "headline": {
+        "displayName": "Condensed headline",
+        "purpose": "Feature headline."
+      },
+      "reading": {
+        "displayName": "Serif reading",
+        "purpose": "Long-form article body."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "state-fill",
+        "value": "150ms ease",
+        "purpose": "Small background and colour transitions."
+      },
+      {
+        "name": "save-pop",
+        "value": "220ms ease-out; scale(1.18) at 50%",
+        "purpose": "Saved icon, only with prefers-reduced-motion: no-preference."
+      },
+      {
+        "name": "refresh-spin",
+        "value": "1s linear infinite",
+        "purpose": "Refresh icon, only with prefers-reduced-motion: no-preference."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "1400px"
+      },
+      {
+        "name": "compact-desktop",
+        "value": "1200px"
+      },
+      {
+        "name": "tablet",
+        "value": "980px"
+      },
+      {
+        "name": "mobile",
+        "value": "650px"
+      },
+      {
+        "name": "narrow-mobile",
+        "value": "360px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary button",
+      "kind": "button",
+      "description": "Prominent reading action.",
+      "html": "<button class=\"ds-primary\">Get the story \u2197</button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:44px;padding:10px 16px;border:1px solid var(--strong-rule,#96998e);border-radius:0;font:600 12px \"DM Sans Variable\",sans-serif;cursor:pointer;transition:background .15s;background:var(--accent,#ff6029);color:#171a17;border-color:var(--accent,#ff6029)}.ds-primary:hover{background:#f37a4e;border-color:#f37a4e}.ds-primary:focus-visible{outline:3px solid var(--ink,#171a17);outline-offset:4px}",
+      "refersTo": "button-primary"
+    },
+    {
+      "name": "Secondary button",
+      "kind": "button",
+      "description": "Load more or recover from an empty state.",
+      "html": "<button class=\"ds-secondary\">More to chew on \u2192</button>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:44px;padding:10px 16px;border:1px solid var(--strong-rule,#96998e);border-radius:0;font:600 12px \"DM Sans Variable\",sans-serif;cursor:pointer;transition:background .15s;background:transparent;color:var(--ink,#171a17)}.ds-secondary:hover{background:var(--panel,#e9e7de)}.ds-secondary:focus-visible{outline:3px solid var(--ink,#171a17);outline-offset:4px}",
+      "refersTo": "button-secondary"
+    },
+    {
+      "name": "Search",
+      "kind": "input",
+      "description": "Quiet underlined discovery field.",
+      "html": "<label class=\"ds-search\"><span aria-hidden=\"true\">\u2315</span><input aria-label=\"Search stories\" placeholder=\"Find your next rabbit hole\u2026\"></label>",
+      "css": ".ds-search{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--ink,#171a17);padding-bottom:9px;color:var(--ink,#171a17)}.ds-search input{min-width:0;width:100%;border:0;background:transparent;color:inherit;caret-color:var(--accent,#ff6029);font:12px/24px \"DM Sans Variable\",sans-serif}.ds-search input:focus-visible{outline:3px solid var(--ink,#171a17);outline-offset:4px}"
+    },
+    {
+      "name": "Edition navigation",
+      "kind": "nav",
+      "description": "Current section marked with an orange underline.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#latest\" aria-current=\"page\">Latest</a><a href=\"#briefing\">The weekly bite</a></nav>",
+      "css": ".ds-nav{display:flex;gap:25px;font:11px \"DM Sans Variable\",sans-serif}.ds-nav a{display:flex;align-items:center;min-height:44px;color:var(--ink,#171a17);text-decoration:none}.ds-nav a[aria-current]{text-decoration:underline;text-decoration-color:var(--accent,#ff6029);text-decoration-thickness:2px;text-underline-offset:6px}.ds-nav a:hover{text-decoration:underline;text-underline-offset:4px}.ds-nav a:focus-visible{outline:3px solid var(--ink,#171a17);outline-offset:4px}"
+    },
+    {
+      "name": "Selected topic",
+      "kind": "chip",
+      "description": "Selected topic control with count.",
+      "html": "<button class=\"ds-topic\" aria-pressed=\"true\">All <span>8</span></button>",
+      "css": ".ds-topic{display:flex;align-items:center;gap:10px;min-height:48px;width:100%;padding:10px 12px;border:0;border-bottom:1px solid var(--accent,#ff6029);border-radius:0;background:var(--accent,#ff6029);color:#171a17;font:12px \"DM Sans Variable\",sans-serif;cursor:pointer}.ds-topic span{margin-left:auto;font-size:10px;font-variant-numeric:tabular-nums}.ds-topic:focus-visible{outline:3px solid var(--ink,#171a17);outline-offset:4px}",
+      "refersTo": "topic-selected"
+    },
+    {
+      "name": "Story card",
+      "kind": "card",
+      "description": "Ruled editorial card with source and date.",
+      "html": "<article class=\"ds-card\"><span>SECURITY</span><h2><a href=\"#story\">Secret scanning widens its net.</a></h2><p>GitHub adds secret detectors for providers including Lovable and Supabase.</p><small><a href=\"https://github.blog/changelog/\">GitHub \u2197</a><time datetime=\"2026-10-05\">5 Oct 2026</time></small></article>",
+      "css": ".ds-card{padding:0 18px;border-right:1px solid var(--rule,#c4c5bb);color:var(--ink,#171a17)}.ds-card>span{font:700 10px \"DM Sans Variable\",sans-serif;letter-spacing:.055em}.ds-card h2{font:700 23px/1.15 Georgia,serif;letter-spacing:-.025em;margin:18px 0 13px}.ds-card p{font:14px/1.55 \"DM Sans Variable\",sans-serif;color:var(--muted,#5d6059);margin-bottom:20px}.ds-card small{display:flex;justify-content:space-between;gap:8px;font:9px \"DM Sans Variable\",sans-serif;color:var(--muted,#5d6059)}.ds-card a{color:inherit;text-decoration:none}.ds-card a:hover{text-decoration:underline;text-underline-offset:4px}.ds-card a:focus-visible{outline:3px solid var(--ink,#171a17);outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Computing Journal",
+    "overview": "A compact, legible publication with the confidence of a printed computing journal. Warm paper, condensed display type and ruled columns establish an editorial rhythm; geometric engineering artwork and a bitten-cookie mark make it recognisable. Utility controls stay quiet while headlines and reading remain prominent.",
+    "keyCharacteristics": [
+      "Condensed masthead and feature headlines paired with serif reading.",
+      "Flat, square surfaces divided by fine rules.",
+      "Saturated orange for selection and prominent actions.",
+      "Visible sources and honest empty states."
+    ],
+    "rules": [
+      {
+        "name": "The Signal Rule",
+        "body": "Use orange to identify actions and selected states; preserve neutral space for reading.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "**Do** preserve clear type roles, visible focus and source attribution.",
+      "**Do** use the actual light and dark tokens and test both modes.",
+      "**Do** adapt the grid to real headline lengths and narrow viewports."
+    ],
+    "donts": [
+      "**Don't** add decorative shadows, rounded card chrome or unrelated accent colours.",
+      "**Don't** substitute invented activity or populated states for truthful empty states.",
+      "**Don't** treat technical artwork as reporting evidence or hide original-source access."
+    ]
+  }
+}

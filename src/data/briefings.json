@@ -1,0 +1,15 @@
+[
+  {
+    "id": "2026-10-08",
+    "title": "Better boundaries. Smaller changes.",
+    "date": "2026-10-08",
+    "description": "The launch briefing: local agent sandboxes, easier model discovery, and a more deliberate path from code to release.",
+    "stories": [
+      "copilot-sandbox",
+      "local-models",
+      "stacked-prs",
+      "secret-scanning",
+      "npm-stage"
+    ]
+  }
+]
