@@ -65,3 +65,8 @@ await writeFile(
   `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`,
 );
 await writeFile("dist/.nojekyll", "");
+
+await writeFile(
+  "dist/benchmarks.json",
+  await readFile("src/data/benchmarks.json", "utf8"),
+);

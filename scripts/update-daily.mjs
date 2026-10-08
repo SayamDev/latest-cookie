@@ -87,3 +87,5 @@ console.log(
   `Daily snapshot: ${snapshot.news.length} headlines, ${snapshot.videos.length} videos, ${snapshot.models.length} models, ${snapshot.trending.length} trends. ${results.filter((r) => r.error).length} source failures.`,
 );
 if (results.every((r) => r.error)) process.exitCode = 1;
+
+await import("./update-benchmarks.mjs");

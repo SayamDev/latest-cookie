@@ -2,6 +2,8 @@
 
 Status: accepted, 2026-10-08.
 
+Amendment, 2026-10-08: the catalogue scope and external-only benchmark decision are superseded by ADR 0003 and [ADR 0004](0004-independent-benchmarks.md). Pricing and comparison principles below still apply.
+
 The user requested model comparison similar in function to Artificial Analysis. Extend Latest Cookie's existing computing-journal interface with independent price exploration, filtering, three-model comparisons and a text workload calculator.
 
 Use a small manually checked first-party catalogue. Artificial Analysis is linked as an external evaluation resource; its site content and benchmark dataset are not replicated. There is no API key, remote runtime request or claim to independently measure performance. API access/licensing would be a separate integration.

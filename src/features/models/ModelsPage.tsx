@@ -1,3 +1,4 @@
+import BenchmarkExplorer from "./BenchmarkExplorer";
 import { ArtHeading } from "../../components/SectionArt";
 import { useState } from "react";
 import { ArrowUpRight, Check, Link, Plus, X } from "lucide-react";
@@ -148,6 +149,7 @@ export default function ModelsPage() {
           <a href="#model-method">How to read this data</a>
         </div>
       </header>
+      <BenchmarkExplorer />
       <FreshnessNotice data={daily} kind="models" />
       <p className="lab-scope">
         Browse newly listed models and compare API costs. OpenRouter listings

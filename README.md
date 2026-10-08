@@ -36,7 +36,7 @@ See CONTRIBUTING.md, COMMUNITY.md and ACCESSIBILITY.md. Code is MIT licensed. Or
 
 `/models/` combines direct-provider references with a daily OpenRouter catalogue. Filters, incremental loading, charts, a text-token calculator and shareable comparisons keep the catalogue navigable. Newly listed means added to OpenRouter, not a verified launch date. Special service variants such as free and batch are excluded. Router listings use router rates; do not substitute these for direct-provider quotes. Tiered or per-request pricing disables estimates. Unknown output limits are shown as unavailable.
 
-Hugging Face supplies a separate platform-specific trending signal. Groq speed figures are dated provider-reported snapshots, not a global fastest-model leaderboard. No Artificial Analysis benchmark dataset is integrated.
+Hugging Face supplies a separate platform-specific trending signal. Groq speed figures are dated provider-reported snapshots, not a global fastest-model leaderboard. The separate Artificial Analysis benchmark explorer uses a clearly dated selected-model snapshot, with optional authenticated daily refresh described below.
 
 ## Daily news and videos
 
@@ -49,3 +49,9 @@ The Pages workflow runs daily at **06:17 UTC**, and can be started with `gh work
 This runs on GitHub, with no local desktop or API key required. GitHub can disable scheduled workflows in public repositories after 60 days without repository activity; maintainers must check Actions and re-enable if needed. The site marks data older than 48 hours. To change timing edit `.github/workflows/pages.yml`; use UTC.
 
 Verify: `npm test`, `npm run lint`, `npm run build`, `npm run test:e2e`. XML fixtures and catalogue fixtures cover malicious URLs, future dates, duplicate entries, absent counters, tiered costs and failed-source preservation.
+
+### Independent model benchmarks
+
+Model Lab opens with a separate benchmark explorer, sorted by Artificial Analysis Intelligence Index (highest first), with a sourced 10-variant snapshot checked on 8 October 2026. This is a selected set of leading and comparison models, not an exhaustive or live market ranking. Reasoning settings remain in model names. No popularity ranking is inferred from benchmark scores. Missing metrics remain null, sort last in either direction and are omitted from charts. The release-date chart shows current scores by release date, not historical scores.
+
+For automatic daily benchmark refresh, add a free Artificial Analysis API key as the repository Actions secret `ARTIFICIAL_ANALYSIS_API_KEY`, then run **Validate and publish** manually. Obtain the key at https://artificialanalysis.ai/data-api. Never commit the key or put it in a Vite/browser variable. The workflow calls the documented free endpoint server-side with pagination. It retains the prior published snapshot on failure, visibly keeps its old date, and leaves the bootstrap snapshot dated when no key is configured. End-to-end response times populate only if reported by the API; they are never derived from token speed. Metadata excluded from the free tier remains from the manually checked snapshot for exact matching slugs, otherwise Unknown. Attribution and source links stay visible.

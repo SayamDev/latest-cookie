@@ -24,6 +24,8 @@ jobs:
       - name: Refresh public feeds
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: npm run update:daily
+        env:
+          ARTIFICIAL_ANALYSIS_API_KEY: ${{ secrets.ARTIFICIAL_ANALYSIS_API_KEY }}
       - run: npm run lint
       - run: npm test
       - run: npm run build
