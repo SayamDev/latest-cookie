@@ -5,7 +5,7 @@ body {
   margin: 0;
   color: #141614;
   background: #f2f0e9;
-  font-family: Inter, Arial, sans-serif;
+  font-family: "DM Sans Variable", sans-serif;
 }
 a {
   color: inherit;
@@ -43,7 +43,7 @@ svg {
   padding-right: 24px;
 }
 .brand-name {
-  font-family: Anton, Impact, sans-serif;
+  font-family: "Barlow Condensed", sans-serif;
   font-size: 88px;
   letter-spacing: -3.6px;
   line-height: 0.94;
@@ -160,7 +160,7 @@ svg {
   font-size: 14px;
 }
 .number {
-  font-family: Anton, sans-serif;
+  font-family: "Barlow Condensed", sans-serif;
   color: #ff5d24;
   font-size: 16px;
 }
@@ -195,7 +195,7 @@ svg {
   letter-spacing: 1px;
 }
 .feature h1 {
-  font-family: Anton, Impact, sans-serif;
+  font-family: "Barlow Condensed", sans-serif;
   font-weight: 400;
   font-size: 76px;
   line-height: 1;

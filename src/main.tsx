@@ -426,9 +426,9 @@ function App() {
                     >
                       <img
                         className="hero-art"
-                        src={href("art/orbital-art.jpg")}
-                        width="440"
-                        height="460"
+                        src={href("art/orange-chip-cookie.jpg")}
+                        width="1100"
+                        height="1100"
                         alt=""
                       />
                     </a>

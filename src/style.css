@@ -884,7 +884,9 @@ input:focus-visible {
 .main:focus {
   outline: none;
 }
-html[data-theme="dark"] .hero-art,
+html[data-theme="dark"] .hero-art {
+  mix-blend-mode: normal;
+}
 html[data-theme="dark"] .footer-art {
   mix-blend-mode: normal;
   filter: invert(0.88) hue-rotate(180deg);
