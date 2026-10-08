@@ -11,17 +11,6 @@
   font-weight: 700;
   min-height: 32px;
 }
-.guide-invitation {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  color: var(--muted);
-}
-.guide-invitation .icon-button {
-  width: 32px;
-  height: 32px;
-}
 .site-guide {
   width: min(780px, calc(100vw - 32px));
   max-height: calc(100dvh - 32px);
@@ -160,9 +149,6 @@
   .guide-save-example {
     flex-direction: column;
     align-items: start;
-  }
-  .guide-invitation {
-    gap: 8px;
   }
 }
 

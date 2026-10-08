@@ -145,7 +145,7 @@ Small fill transitions last 150ms. Save icons briefly scale and refresh icons sp
 
 ## Site guide and artwork themes
 
-The Site guide is a user-opened native dialog with Read, Watch, Compare and Save choices. A dismissible first-visit invitation offers discovery without blocking reading. The guide includes a real bookmark action, source/freshness explanations and direct route links. Dismissal is browser-local; Escape closes and returns focus to the opener. On mobile, choices form a two-column grid.
+The Site guide is a native dialog that opens automatically on the first visit in a browser with Read, Watch, Compare and Save choices. A browser-local seen flag prevents repeat automatic openings. The close and explore-on-my-own controls are immediately available. The guide includes a real bookmark action, source/freshness explanations and direct route links. Dismissal is browser-local; Escape closes and returns focus to the opener. On mobile, choices form a two-column grid.
 
 The daily news preview has a 30px desktop inner gutter and 28px vertical padding to separate it from Explore topics. Mobile uses the page gutter.
 

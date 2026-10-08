@@ -10,6 +10,26 @@ import {
 import { ArtworkFilters, SectionArt } from "./SectionArt";
 import type { Story } from "../lib/content";
 import "./guide.css";
+const guideKey = "latest-cookie:guide-seen";
+function hasSeenGuide() {
+  for (const storage of ["localStorage", "sessionStorage"] as const) {
+    try {
+      if (window[storage].getItem(guideKey) === "yes") return true;
+    } catch {
+      /* Try the next available browser store. */
+    }
+  }
+  return false;
+}
+function rememberGuide() {
+  for (const storage of ["localStorage", "sessionStorage"] as const) {
+    try {
+      window[storage].setItem(guideKey, "yes");
+    } catch {
+      /* The guide still works when storage is blocked. */
+    }
+  }
+}
 const sections = [
   {
     label: "Read",
@@ -64,24 +84,9 @@ export function SiteGuide({
   const dialog = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLButtonElement>(null);
   const [step, setStep] = useState(0);
-  const [invitation, setInvitation] = useState(() => {
-    try {
-      return localStorage.getItem("latest-cookie:guide-seen") !== "yes";
-    } catch {
-      return true;
-    }
-  });
   const section = sections[step];
-  function dismissInvitation() {
-    setInvitation(false);
-    try {
-      localStorage.setItem("latest-cookie:guide-seen", "yes");
-    } catch {
-      /* Works for this visit. */
-    }
-  }
   function open() {
-    dismissInvitation();
+    rememberGuide();
     dialog.current?.showModal();
   }
   function close() {
@@ -91,6 +96,10 @@ export function SiteGuide({
     const element = dialog.current;
     const restore = () => opener.current?.focus();
     element?.addEventListener("close", restore);
+    if (element && !hasSeenGuide()) {
+      element.showModal();
+      rememberGuide();
+    }
     return () => element?.removeEventListener("close", restore);
   }, []);
   return (
@@ -99,21 +108,6 @@ export function SiteGuide({
         <button ref={opener} className="text-button" onClick={open}>
           <BookOpen size={16} /> Site guide
         </button>
-        {invitation && (
-          <div className="guide-invitation">
-            <span>New here? Find your first good read.</span>
-            <button className="text-button" onClick={open}>
-              Take a look <ArrowRight size={16} />
-            </button>
-            <button
-              className="icon-button"
-              aria-label="Dismiss guide invitation"
-              onClick={dismissInvitation}
-            >
-              <X size={17} />
-            </button>
-          </div>
-        )}
       </div>
       <dialog
         ref={dialog}

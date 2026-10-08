@@ -21,7 +21,7 @@ Catch up, follow an interesting thread, compare models, and keep a good read for
 | **Coffee-break read** | Save stories to your Cookie Jar. Bookmarks stay in the current browser. |
 | **Conversation** | Share a project or ask a question through GitHub Discussions. |
 
-**New here?** Open **Site guide** above any page. Its Read / Watch / Compare / Save controls explain the features and let you bookmark a real story. The invitation is dismissible; the guide is always available.
+**New here?** The guide opens automatically on your first visit in a browser. Its Read / Watch / Compare / Save controls explain the features and let you bookmark a real story. Close it anytime; returning visitors can reopen **Site guide** above any page. A local browser flag remembers that it has been shown—no account, fingerprinting or visitor tracking. Clearing site data or using a different browser makes it a first visit again.
 
 Light and dark themes · Keyboard access · Responsive layouts · RSS · Optional illustrated/original artwork
 
@@ -93,7 +93,7 @@ Set `BASE_PATH=/latest-cookie/` and `SITE_URL=https://sayamdev.github.io/latest-
 
 ## Privacy, security and ownership
 
-Reading needs no login. There are no analytics, advertising or tracking cookies. Bookmarks, theme, artwork and guide-dismissal preferences use localStorage. Clearing browser site data removes them. Videos open on YouTube; thumbnail requests go to its image service. GitHub hosts the site and discussions under its own policies.
+Reading needs no login. There are no analytics, advertising or tracking cookies. Bookmarks, theme, artwork and the guide’s seen flag use localStorage. The guide also uses sessionStorage as a fallback when persistent storage is unavailable. Clearing browser site data removes them. Videos open on YouTube; thumbnail requests go to its image service. GitHub hosts the site and discussions under its own policies.
 
 Read the [security review](docs/security-review.md) for checked boundaries, hardening and hosting limitations. It is a scoped code and deployment review, not a penetration-test certification.
 

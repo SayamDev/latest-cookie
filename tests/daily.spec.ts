@@ -1,5 +1,11 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+// These journeys exercise returning visitors; guide.spec.ts covers first visits.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() =>
+    localStorage.setItem("latest-cookie:guide-seen", "yes"),
+  );
+});
 test("daily news and topic-based video discovery", async ({ page }, info) => {
   await page.goto("/news/");
   await expect(
