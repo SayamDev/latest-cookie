@@ -1,4 +1,8 @@
-import { ArtHeading, SectionArt } from "./components/SectionArt";
+import {
+  ArtHeading,
+  SectionArt,
+  ArtworkFilters,
+} from "./components/SectionArt";
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -827,6 +831,7 @@ function App() {
           )}
         </main>
       </div>
+      <ArtworkFilters />
       <footer>
         <div className="footer">
           <a className="browse" href={href("briefings/")}>

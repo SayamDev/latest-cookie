@@ -30,6 +30,27 @@ const crops: Record<
   jar: ["approved-weekly-community-jar.jpg", 1024, 1536, 496, 1086, 488, 401],
   footer: ["approved-home-footer.jpg", 1536, 1024, 397, 885, 788, 113],
 };
+// Remove the light paper pixels at render time, keeping the approved source intact.
+export function ArtworkFilters() {
+  return (
+    <svg
+      width="0"
+      height="0"
+      aria-hidden="true"
+      style={{ position: "absolute" }}
+    >
+      <defs>
+        <filter id="artwork-paper-key" colorInterpolationFilters="sRGB">
+          <feColorMatrix
+            type="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -3 -3 -3 0 7.5"
+          />
+          <feComposite in2="SourceGraphic" operator="in" />
+        </filter>
+      </defs>
+    </svg>
+  );
+}
 export function SectionArt({
   kind,
   className = "",

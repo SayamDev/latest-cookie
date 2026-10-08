@@ -1546,3 +1546,13 @@ html[data-artwork="original"] .model-lab .title-dot {
 .community-page .section-art {
   mix-blend-mode: normal;
 }
+
+/* Key out the preview paper, rather than masking an illustration's silhouette. */
+.section-art {
+  filter: url(#artwork-paper-key);
+  mix-blend-mode: normal;
+}
+html[data-theme="dark"] .section-art,
+.bookmarks .section-art {
+  filter: url(#artwork-paper-key) invert(0.88) hue-rotate(180deg);
+}

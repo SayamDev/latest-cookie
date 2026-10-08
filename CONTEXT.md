@@ -10,3 +10,4 @@ Video topics use transparent title/channel rules, not a personalized YouTube fee
 
 ## Optional illustrations (8 October 2026)
 The existing orange SVG logo and page grids are retained. Section titles and jar empty states use decorative artwork from the exact approved preview boards in `public/art/approved-*.jpg` (CSS windows isolate each illustration); the footer uses its cookie/circuit panel. Footer Artwork selector restores original presentation, persisted locally as `latest-cookie-artwork`. Original hero and radial artwork remain available. The new illustration assets are decorative, not reporting evidence.
+Approved illustration paper is removed at render time with an SVG alpha filter, so artwork blends into each page surface without rectangular backgrounds. Original source images remain unmodified; dark surfaces use a light-ink treatment.
