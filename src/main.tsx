@@ -3,6 +3,7 @@ import {
   SectionArt,
   ArtworkFilters,
 } from "./components/SectionArt";
+import { SiteGuide } from "./components/SiteGuide";
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -91,9 +92,7 @@ function App() {
   }, [artwork]);
   const [dailyData, setDailyData] = useState(daily);
   const [stories, setStories] = useState(() => validateStories(rawStories));
-  const path = decodeURI(location.pathname)
-    .slice(base.length)
-    .replace(/^\/|\/$/g, "");
+  const path = location.pathname.slice(base.length).replace(/^\/|\/$/g, "");
   const isHome = path === "";
   const isSaved = path === "saved";
   const isFeed = isHome || isSaved;
@@ -113,6 +112,7 @@ function App() {
     const handler = (e: KeyboardEvent) => {
       if (
         e.key === "/" &&
+        !document.querySelector("dialog[open]") &&
         !(e.target instanceof HTMLInputElement) &&
         !(e.target instanceof HTMLTextAreaElement)
       ) {
@@ -181,10 +181,7 @@ function App() {
         aria-pressed={saved.includes(s.id)}
         onClick={() => toggle(s.id)}
       >
-        <Bookmark
-          size={20}
-          fill={saved.includes(s.id) ? "currentColor" : "none"}
-        />
+        <Bookmark size={20} fill="none" />
       </button>
     );
   }
@@ -341,6 +338,11 @@ function App() {
           </a>
         </div>
       </nav>
+      <SiteGuide
+        story={lead}
+        saved={saved.includes(lead.id)}
+        toggle={() => toggle(lead.id)}
+      />
       <div className={isFeed ? "layout" : "reading-layout"}>
         {isFeed && (
           <aside className="sidebar" aria-label="Topics and source freshness">
@@ -812,9 +814,9 @@ function App() {
                 </p>
                 <h2>Built in the open.</h2>
                 <p>
-                  The code is MIT licensed. Original linked articles belong to
-                  their publishers. Latest Cookie is not affiliated with or
-                  endorsed by the companies it covers.
+                  Created by Sayam Ajmal. The code is MIT licensed. Original
+                  linked articles belong to their publishers. Latest Cookie is
+                  not affiliated with or endorsed by the companies it covers.
                 </p>
                 <a className="button" href={repo}>
                   <GitFork size={17} />
@@ -891,7 +893,7 @@ function App() {
           </span>
         </div>
         <div className="colophon">
-          <span>Latest Cookie · Made for curious people.</span>
+          <span>© 2026 Sayam Ajmal · Latest Cookie</span>
           <span>Small bites. A wider world.</span>
         </div>
       </footer>

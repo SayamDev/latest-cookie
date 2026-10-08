@@ -1,3 +1,4 @@
+import { fetchText } from "./safe-fetch.mjs";
 import { readFile, writeFile } from "node:fs/promises";
 import { benchmarkSnapshotSchema } from "../src/lib/benchmarks.ts";
 const path = "src/data/benchmarks.json";
@@ -7,14 +8,15 @@ let previous = benchmarkSnapshotSchema.parse(
 // Preserve the last successful published snapshot across scheduled checkouts.
 if (process.env.GITHUB_ACTIONS) {
   try {
-    const r = await fetch(
-      "https://sayamdev.github.io/latest-cookie/benchmarks.json",
-      { signal: AbortSignal.timeout(15000) },
+    const p = benchmarkSnapshotSchema.parse(
+      JSON.parse(
+        await fetchText(
+          "https://sayamdev.github.io/latest-cookie/benchmarks.json",
+          { timeout: 15000 },
+        ),
+      ),
     );
-    if (r.ok) {
-      const p = benchmarkSnapshotSchema.parse(await r.json());
-      if (p.checked >= previous.checked) previous = p;
-    }
+    if (p.checked >= previous.checked) previous = p;
   } catch {
     console.warn("Using repository benchmark snapshot.");
   }
@@ -30,12 +32,12 @@ if (!key) {
     const models = [];
     let version;
     for (let page = 1; page <= 20; page++) {
-      const r = await fetch(
-        `https://artificialanalysis.ai/api/v2/language/models/free?page=${page}`,
-        { headers: { "x-api-key": key }, signal: AbortSignal.timeout(25000) },
+      const body = JSON.parse(
+        await fetchText(
+          `https://artificialanalysis.ai/api/v2/language/models/free?page=${page}`,
+          { headers: { "x-api-key": key }, redirects: 0 },
+        ),
       );
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      const body = await r.json();
       if (
         !Array.isArray(body.data) ||
         !body.data.length ||

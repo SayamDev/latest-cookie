@@ -1,57 +1,108 @@
-# Latest Cookie
+<div align="center">
+  <img src="public/favicon.svg" width="64" height="64" alt="Latest Cookie orange cookie mark">
+  <h1>Latest Cookie</h1>
+  <p><strong>Tech worth your time. Straight from the source.</strong></p>
+  <p>A free computing journal for curious developers, makers and people who follow technology.</p>
+  <p><a href="https://sayamdev.github.io/latest-cookie/"><strong>Open Latest Cookie</strong></a> &nbsp; · &nbsp; <a href="https://sayamdev.github.io/latest-cookie/models/">Model Lab</a> &nbsp; · &nbsp; <a href="https://github.com/SayamDev/latest-cookie/discussions">Join the conversation</a></p>
+  <p>Created by <a href="https://github.com/SayamDev">Sayam Ajmal</a></p>
+</div>
 
-An independent, free technology reading and discovery app. Useful stories, original sources, browser-local bookmarks and a public community.
+![Latest Cookie — the daily news desk, warm paper and orange cookie artwork](docs/site-preview.png)
 
-## Develop
+## A little more signal
 
-Requires Node.js 22.12+ (Node 24 LTS recommended).
+Catch up, follow an interesting thread, compare models, and keep a good read for later. Latest Cookie pairs the feel of a printed computing journal with practical discovery tools. Warm paper, orange signals and technical cookie illustrations give it an identity of its own.
+
+| Find your next… | What you can do |
+| :--- | :--- |
+| **Good read** | Search curated stories by topic, follow original sources, or browse daily publisher headlines. |
+| **Rabbit hole** | Explore recent videos from four selected tech channels, with AI, coding, gadgets and computer science filters. |
+| **Model** | Sort sourced benchmark variants, compare three side by side, explore interactive charts and export a CSV. Browse the separate API catalogue and estimate token costs. |
+| **Coffee-break read** | Save stories to your Cookie Jar. Bookmarks stay in the current browser. |
+| **Conversation** | Share a project or ask a question through GitHub Discussions. |
+
+**New here?** Open **Site guide** above any page. Its Read / Watch / Compare / Save controls explain the features and let you bookmark a real story. The invitation is dismissible; the guide is always available.
+
+Light and dark themes · Keyboard access · Responsive layouts · RSS · Optional illustrated/original artwork
+
+## Freshness you can inspect
+
+| Content | Where it comes from | Update behaviour |
+| :--- | :--- | :--- |
+| News desk | The Verge, Ars Technica, TechCrunch, WIRED public feeds | Scheduled daily at **06:17 UTC**; timestamps show successful fetches. |
+| Watch | Marques Brownlee, Fireship, Computerphile, Two Minute Papers | Daily public feed snapshots. Views rank selected videos, not global YouTube trends. |
+| API catalogue | OpenRouter plus checked direct-provider references | Router catalogue refreshes daily; direct references keep their own checked dates. |
+| Benchmarks | Artificial Analysis, with links to each measured variant | Selected snapshot checked **8 October 2026**. Automatic refresh requires an optional API key. |
+| Curated stories | Source-linked, AI-assisted summaries | Edited separately; each story has publication and source-check dates. No automatic generated filler. |
+
+Failed feeds retain the last valid data and its date. Complete public-feed failure stops publication. We retain up to 12 news items per outlet and eight videos per channel within 30 days, not full archives. **Latest · 24 hours**, **7 days**, then **30 days** are the reading windows.
+
+Capability scores, popularity and pricing answer different questions. They stay separate. Unknown benchmark values are never presented as zero; reasoning settings and sources remain visible. Release-date charts show current scores by release date, not historical performance. Tiered prices are excluded from the simple cost calculator.
+
+<details>
+<summary><strong>Connect daily benchmark updates</strong></summary>
+
+Get a free key from [Artificial Analysis](https://artificialanalysis.ai/data-api), add it to this repository’s **Actions secrets** as `ARTIFICIAL_ANALYSIS_API_KEY`, then manually run **Validate and publish**.
+
+The workflow calls the free endpoint server-side, paginates, validates the full result and retains the last valid snapshot on failure. Never commit the key or use a `VITE_` variable. Metadata excluded from the free tier stays from the checked snapshot for exact matching slugs, otherwise Unknown. End-to-end response times appear only when reported; they are never estimated from token speed.
+
+Without a key, the dated benchmark snapshot remains available. Other daily feeds need no key.
+
+</details>
+
+## Built to be read, easy to run
+
+**React · TypeScript · Vite · Zod · GitHub Actions · Playwright**
+
+```text
+Public feeds → bounded HTTPS fetches → validation → last-good snapshots
+                                                    ↓
+                                          Static GitHub Pages site
+                                                    ↓
+                                    Search · compare · save locally
+```
+
+There is no public application server, database, account system or browser-side AI inference. A scheduled build does the data work; the browser handles discovery. This keeps hosting simple and secrets off the page.
+
+### Run locally
+
+Use Node.js 24 (CI uses 24).
 
 ```sh
 npm ci
 npm run dev
-npm test
-npm run build
-npm run preview
 ```
 
-## Content
+Dependency lifecycle scripts are disabled through `.npmrc`; the current build needs none.
 
-Edit `src/data/stories.json`. Every entry needs an original HTTPS source, publication date, collection date, concise original summary, topic and source-check status. Verify claims against the original before publishing. Do not copy full articles. `src/lib/content.ts` validates stories and rejects duplicates. Stories are curated snapshots, not a continuously updating feed. The first collection was checked on 8 October 2026.
+```sh
+npm test           # Content, filters, ingestion and security boundaries
+npm run lint
+npm run build
+npm run preview
+npx playwright test  # Desktop/mobile interaction and accessibility checks
+```
 
-Use a pull request for editorial changes. New stories must be reviewed before merging. Build generates individual story URLs, RSS and a sitemap. Search covers published stories only.
+Install Playwright’s Chromium browser once with `npx playwright install chromium` if needed.
 
-## Deploy
+### Publish
 
-The Pages workflow builds and deploys main. Enable GitHub Pages with GitHub Actions as its source. `BASE_PATH` must match the repository subpath; `SITE_URL` must be the public origin including that subpath. For a root domain set `BASE_PATH=/` and update `SITE_URL`.
+Push to `main` to validate and publish to GitHub Pages. Scheduled or manual runs also refresh public feeds. GitHub Pages must use **GitHub Actions** as its deployment source.
 
-## Privacy and limits
+Set `BASE_PATH=/latest-cookie/` and `SITE_URL=https://sayamdev.github.io/latest-cookie` for this repository. Adjust both when hosting elsewhere. The build generates individual story routes, RSS, sitemap and JSON snapshots.
 
-No analytics, advertising or login for reading. Bookmarks and theme use localStorage in the current browser. GitHub hosts source/discussions and applies its own policies. There is no email subscription service. No live community counts are displayed. Editorial summaries are manually curated. The news desk and discovery feeds import public metadata daily. Video thumbnails request images from YouTube; there is no embedded player.
+## Privacy, security and ownership
 
-## Contribute
+Reading needs no login. There are no analytics, advertising or tracking cookies. Bookmarks, theme, artwork and guide-dismissal preferences use localStorage. Clearing browser site data removes them. Videos open on YouTube; thumbnail requests go to its image service. GitHub hosts the site and discussions under its own policies.
 
-See CONTRIBUTING.md, COMMUNITY.md and ACCESSIBILITY.md. Code is MIT licensed. Original linked articles remain the property of their publishers.
+Read the [security review](docs/security-review.md) for checked boundaries, hardening and hosting limitations. It is a scoped code and deployment review, not a penetration-test certification.
 
-## Model Lab
+**© 2026 Sayam Ajmal.** Code is [MIT licensed](LICENSE). Original articles, thumbnails and benchmark data remain subject to their owners’ rights and terms. Latest Cookie is not affiliated with the companies it covers.
 
-`/models/` combines direct-provider references with a daily OpenRouter catalogue. Filters, incremental loading, charts, a text-token calculator and shareable comparisons keep the catalogue navigable. Newly listed means added to OpenRouter, not a verified launch date. Special service variants such as free and batch are excluded. Router listings use router rates; do not substitute these for direct-provider quotes. Tiered or per-request pricing disables estimates. Unknown output limits are shown as unavailable.
+## Build with us
 
-Hugging Face supplies a separate platform-specific trending signal. Groq speed figures are dated provider-reported snapshots, not a global fastest-model leaderboard. The separate Artificial Analysis benchmark explorer uses a clearly dated selected-model snapshot, with optional authenticated daily refresh described below.
+[Contributing](CONTRIBUTING.md) · [Community](COMMUNITY.md) · [Accessibility](ACCESSIBILITY.md) · [Architecture decisions](docs/adr/) · [Report an issue](https://github.com/SayamDev/latest-cookie/issues)
 
-## Daily news and videos
+Stories live in `src/data/stories.json`. Use an original HTTPS source, accurate dates and concise summaries; validate and review claims before publishing. Never copy full articles or invent results or activity.
 
-`/news/` imports publisher headlines from The Verge, Ars Technica, TechCrunch and WIRED. `/watch/` imports recent uploads and reported view counts from Marques Brownlee, Fireship, Computerphile and Two Minute Papers. Video topics are assigned by title/channel rules; they are not YouTube's personalized categories. Most viewed ranks lifetime views within the selected recent feed entries. Some feeds expose no counter; absence is not zero.
-
-Run `npm run update:daily` to fetch a snapshot. Sources are allowlisted in `scripts/feed-sources.mjs`; parsing, date validation, deduplication and last-good fallback are tested. Up to 12 headlines per outlet and 8 videos per channel are retained within 30 days. Article bodies and video descriptions are not copied. Source links take visitors to the publisher; subscriptions may apply.
-
-The Pages workflow runs daily at **06:17 UTC**, and can be started with `gh workflow run pages.yml`. Schedule times can be delayed by GitHub. Scheduled/manual builds fetch the latest published snapshot as fallback before updating, validate, test, build and deploy. Generated snapshots are deployed as `daily.json`; scheduled runs do not commit to the source repository. Source control carries a bootstrap snapshot. All-source failure fails the build, preserving the existing deployment; partial failures retain prior data with explicit stale status. Feed health shows last-successful timestamps, not just the latest attempt.
-
-This runs on GitHub, with no local desktop or API key required. GitHub can disable scheduled workflows in public repositories after 60 days without repository activity; maintainers must check Actions and re-enable if needed. The site marks data older than 48 hours. To change timing edit `.github/workflows/pages.yml`; use UTC.
-
-Verify: `npm test`, `npm run lint`, `npm run build`, `npm run test:e2e`. XML fixtures and catalogue fixtures cover malicious URLs, future dates, duplicate entries, absent counters, tiered costs and failed-source preservation.
-
-### Independent model benchmarks
-
-Model Lab opens with a separate benchmark explorer, sorted by Artificial Analysis Intelligence Index (highest first), with a sourced 10-variant snapshot checked on 8 October 2026. This is a selected set of leading and comparison models, not an exhaustive or live market ranking. Reasoning settings remain in model names. No popularity ranking is inferred from benchmark scores. Missing metrics remain null, sort last in either direction and are omitted from charts. The release-date chart shows current scores by release date, not historical scores.
-
-For automatic daily benchmark refresh, add a free Artificial Analysis API key as the repository Actions secret `ARTIFICIAL_ANALYSIS_API_KEY`, then run **Validate and publish** manually. Obtain the key at https://artificialanalysis.ai/data-api. Never commit the key or put it in a Vite/browser variable. The workflow calls the documented free endpoint server-side with pagination. It retains the prior published snapshot on failure, visibly keeps its old date, and leaves the bootstrap snapshot dated when no key is configured. End-to-end response times populate only if reported by the API; they are never derived from token speed. Metadata excluded from the free tier remains from the manually checked snapshot for exact matching slugs, otherwise Unknown. Attribution and source links stay visible.
+<div align="center"><sub>Small bites. A wider world.</sub></div>

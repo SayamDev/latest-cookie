@@ -22,7 +22,7 @@ function run(responses, key = "fixture") {
     JSON.stringify(snapshot),
   );
   try {
-    const script = `let responses=${JSON.stringify(responses)};globalThis.fetch=async()=>{const b=responses.shift();if(!b)throw Error('unexpected request');return {ok:!b.error,status:b.error||200,json:async()=>b};};await import(${JSON.stringify(updater)});`;
+    const script = `let responses=${JSON.stringify(responses)};globalThis.fetch=async()=>{const b=responses.shift();if(!b)throw Error('unexpected request');return new Response(JSON.stringify(b),{status:b.error||200});};await import(${JSON.stringify(updater)});`;
     const child = spawnSync(
       process.execPath,
       ["--experimental-strip-types", "--input-type=module", "-e", script],

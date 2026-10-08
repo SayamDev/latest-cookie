@@ -1,3 +1,4 @@
+import { fetchText } from "./safe-fetch.mjs";
 import { readFile, writeFile } from "node:fs/promises";
 import { sources } from "./feed-sources.mjs";
 import {
@@ -23,19 +24,13 @@ try {
     trending: [],
   };
 }
-async function request(url) {
-  const r = await fetch(url, {
-    signal: AbortSignal.timeout(25000),
+const request = (url) =>
+  fetchText(url, {
     headers: {
       "User-Agent":
         "LatestCookie/1.0 (+https://github.com/SayamDev/latest-cookie)",
     },
   });
-  if (!r.ok) throw new Error(`HTTP ${r.status}`);
-  const body = await r.text();
-  if (body.length > 5_000_000) throw new Error("Feed too large");
-  return body;
-}
 // Scheduled builds retain the last published good entries if an upstream fails.
 if (process.env.GITHUB_ACTIONS) {
   try {

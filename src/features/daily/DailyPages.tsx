@@ -105,8 +105,8 @@ export default function DailyPages({ kind }: { kind: "news" | "videos" }) {
   const [topic, setTopic] = useState("All");
   const [source, setSource] = useState("All");
   const [query, setQuery] = useState("");
-  const [sort, setSort] = useState(kind === "videos" ? "views" : "latest");
-  const [days, setDays] = useState("30");
+  const [sort, setSort] = useState("latest");
+  const [days, setDays] = useState("1");
   const [limit, setLimit] = useState(12);
   const [busy, setBusy] = useState(false);
   const [feedback, setFeedback] = useState("");
@@ -231,6 +231,7 @@ export default function DailyPages({ kind }: { kind: "news" | "videos" }) {
               setLimit(12);
             }}
           >
+            <option value="1">Latest · 24 hours</option>
             <option value="7">7 days</option>
             <option value="30">30 days</option>
           </select>
@@ -243,8 +244,8 @@ export default function DailyPages({ kind }: { kind: "news" | "videos" }) {
               value={sort}
               onChange={(e) => setSort(e.target.value)}
             >
-              <option value="views">Most viewed in this selection</option>
               <option value="latest">Newest first</option>
+              <option value="views">Most viewed in this selection</option>
             </select>
           </label>
         )}

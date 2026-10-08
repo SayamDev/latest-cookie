@@ -33,7 +33,7 @@ const crops: Record<
   footer: ["approved-home-footer.jpg", 1536, 1024, 397, 885, 788, 113],
 };
 // Remove the light paper pixels at render time, keeping the approved source intact.
-export function ArtworkFilters() {
+export function ArtworkFilters({ prefix = "artwork" }: { prefix?: string }) {
   return (
     <svg
       width="0"
@@ -42,7 +42,36 @@ export function ArtworkFilters() {
       style={{ position: "absolute" }}
     >
       <defs>
-        <filter id="artwork-paper-key" colorInterpolationFilters="sRGB">
+        <filter id={`${prefix}-dark-key`} colorInterpolationFilters="sRGB">
+          <feColorMatrix
+            type="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -3 -3 -3 0 7.5"
+          />
+          <feComposite in2="SourceGraphic" operator="in" result="cutout" />
+          <feColorMatrix
+            in="cutout"
+            type="matrix"
+            values="-.8 0 0 0 .9  0 -.8 0 0 .88  0 0 -.8 0 .82  0 0 0 1 0"
+            result="lightInk"
+          />
+          <feColorMatrix
+            in="cutout"
+            type="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  4 -4 0 0 0"
+            result="orangeMask"
+          />
+          <feComposite
+            in="cutout"
+            in2="orangeMask"
+            operator="in"
+            result="warmColour"
+          />
+          <feMerge>
+            <feMergeNode in="lightInk" />
+            <feMergeNode in="warmColour" />
+          </feMerge>
+        </filter>
+        <filter id={`${prefix}-paper-key`} colorInterpolationFilters="sRGB">
           <feColorMatrix
             type="matrix"
             values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -3 -3 -3 0 7.5"

@@ -339,6 +339,7 @@ input:focus-visible {
   margin-bottom: 20px;
 }
 .hero-art {
+  filter: url(#artwork-paper-key);
   width: 100%;
   height: auto;
   max-height: 410px;
@@ -542,7 +543,7 @@ input:focus-visible {
   background: var(--panel);
 }
 .bookmarks .save-button.is-saved {
-  color: var(--accent);
+  color: var(--ink);
   background: transparent;
 }
 .load-more {
@@ -884,11 +885,12 @@ input:focus-visible {
   outline: none;
 }
 html[data-theme="dark"] .hero-art {
+  filter: url(#artwork-paper-key);
   mix-blend-mode: normal;
 }
 html[data-theme="dark"] .footer-art {
   mix-blend-mode: normal;
-  filter: invert(0.88) hue-rotate(180deg);
+  filter: url(#artwork-dark-key);
 }
 @media (min-width: 1400px) {
   .top {
@@ -1554,7 +1556,7 @@ html[data-artwork="original"] .model-lab .title-dot {
 }
 html[data-theme="dark"] .section-art,
 .bookmarks .section-art {
-  filter: url(#artwork-paper-key) invert(0.88) hue-rotate(180deg);
+  filter: url(#artwork-dark-key);
 }
 
 .chew-cookie {
@@ -1575,4 +1577,16 @@ html[data-theme="dark"] .section-art,
   .art-heading .section-art {
     width: 88px;
   }
+}
+
+.save-button.is-saved svg,
+.save-button:hover svg,
+.save-button:focus-visible svg {
+  color: #c44314;
+}
+html[data-theme="dark"] .save-button.is-saved svg,
+html[data-theme="dark"] .save-button:hover svg,
+html[data-theme="dark"] .save-button:focus-visible svg,
+.bookmarks .save-button svg {
+  color: var(--accent);
 }

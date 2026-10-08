@@ -25,6 +25,8 @@ test("daily news and topic-based video discovery", async ({ page }, info) => {
   });
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.goto("/watch/");
+  await expect(page.getByLabel("Published within")).toHaveValue("1");
+  await page.getByLabel("Published within").selectOption("30");
   await page.getByRole("button", { name: "AI", exact: true }).click();
   await expect(
     page.getByRole("button", { name: "AI", exact: true }),

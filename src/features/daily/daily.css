@@ -154,7 +154,7 @@
 }
 .daily-preview {
   border-bottom: 2px solid var(--ink);
-  padding: 0 0 22px;
+  padding: 28px 30px 28px;
   margin-bottom: 28px;
 }
 .daily-heading-row {
@@ -403,4 +403,10 @@
 }
 .video-thumb img {
   position: relative;
+}
+
+@media (max-width: 650px) {
+  .daily-preview {
+    padding: 24px 0;
+  }
 }

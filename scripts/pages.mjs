@@ -1,6 +1,12 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 const stories = JSON.parse(await readFile("src/data/stories.json", "utf8"));
-const template = await readFile("dist/index.html", "utf8");
+const securityPolicy =
+  "<meta\n      http-equiv=\"Content-Security-Policy\"\n      content=\"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://i.ytimg.com; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests\"\n    />";
+const template = (await readFile("dist/index.html", "utf8")).replace(
+  '<meta charset="UTF-8" />',
+  '<meta charset="UTF-8" />' + securityPolicy,
+);
+await writeFile("dist/index.html", template);
 const origin = (
   process.env.SITE_URL || "https://sayamdev.github.io/latest-cookie"
 ).replace(/\/$/, "");

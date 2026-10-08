@@ -128,7 +128,7 @@ Square buttons and rectangular content regions continue the journal's ruled geom
 - **Topics and navigation:** orange marks the selected topic, panel fill marks hover, and the current edition link has an orange underline. Mobile topic controls wrap without horizontal scrolling.
 - **Search:** transparent field with a bottom rule, outlined search icon and orange caret. Its keyboard hint disappears on mobile. Keep it distinct from the main reading hierarchy.
 - **Story cards:** flat ruled columns, serif title, sans-serif summary and a source/date line. Save controls sit beside the topic label. Mobile cards use horizontal separators.
-- **Reading list:** a dark, pale-text rail with a direct empty-state explanation. Saving updates the list immediately; saved buttons change fill, and saved icons inside the rail use orange. The full saved page supports empty and populated states.
+- **Reading list:** a dark, pale-text rail with a direct empty-state explanation. Saving updates the list immediately; saved bookmark outlines use a deeper orange on paper for contrast and bright orange in dark mode; the guide keeps button text in ink. The full saved page supports empty and populated states.
 - **Source notes:** neutral panel fill and sans-serif explanatory text inside serif reading pages. Source links remain visibly identifiable.
 - **Feedback:** status messages use contrasting text at the viewport bottom. Disabled controls dim to 60% opacity with a waiting cursor. Empty results present an explicit explanation and recovery action.
 
@@ -142,3 +142,13 @@ Small fill transitions last 150ms. Save icons briefly scale and refresh icons sp
 - **Don't** add decorative shadows, rounded card chrome or unrelated accent colours.
 - **Don't** substitute invented activity or populated states for truthful empty states.
 - **Don't** treat technical artwork as reporting evidence or hide original-source access.
+
+## Site guide and artwork themes
+
+The Site guide is a user-opened native dialog with Read, Watch, Compare and Save choices. A dismissible first-visit invitation offers discovery without blocking reading. The guide includes a real bookmark action, source/freshness explanations and direct route links. Dismissal is browser-local; Escape closes and returns focus to the opener. On mobile, choices form a two-column grid.
+
+The daily news preview has a 30px desktop inner gutter and 28px vertical padding to separate it from Explore topics. Mobile uses the page gutter.
+
+Dark artwork separates neutral ink from warm colours: neutral linework becomes pale while orange chips retain their hue. It does not invert the whole illustration. Guide SVG filter definitions live inside the dialog so artwork remains visible in the top layer.
+
+The photographic home cookie keeps its original warm shading in both themes; only its paper background is removed. Saved outlines use #c44314 on light paper for contrast. The guide backdrop uses black at 72% opacity, and its 11–13px supporting type follows the existing compact metadata roles.
