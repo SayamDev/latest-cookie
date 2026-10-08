@@ -152,3 +152,5 @@ The daily news preview has a 30px desktop inner gutter and 28px vertical padding
 Dark artwork separates neutral ink from warm colours: neutral linework becomes pale while orange chips retain their hue. It does not invert the whole illustration. Guide SVG filter definitions live inside the dialog so artwork remains visible in the top layer.
 
 The photographic home cookie keeps its original warm shading in both themes; only its paper background is removed. Saved outlines use #c44314 on light paper for contrast. The guide backdrop uses black at 72% opacity, and its 11–13px supporting type follows the existing compact metadata roles.
+
+The illustrated design is the only public variant; the old artwork preference is no longer read. Footer artwork occupies a larger desktop column, a full-width centred second row on tablets and a centred strip after links on phones.

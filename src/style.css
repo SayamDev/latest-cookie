@@ -1450,7 +1450,7 @@ html[data-theme="dark"] .footer-art {
   letter-spacing: 0.04em;
 }
 
-/* Optional editorial artwork: existing page grids and navigation stay intact. */
+/* Editorial artwork: existing page grids and navigation stay intact. */
 .art-heading {
   display: flex;
   align-items: center;
@@ -1478,56 +1478,14 @@ html[data-theme="dark"] .footer-art {
   width: 220px;
   margin-bottom: 16px;
 }
-.original-empty-icon,
-.original-footer-art {
-  display: none;
-}
 .new-footer-art {
   width: 100%;
-  max-width: 260px;
+  max-width: 420px;
   align-self: center;
   justify-self: center;
 }
-.artwork-preference {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 16px 0;
-  font-size: 12px;
-}
-.artwork-preference label {
-  font-weight: 700;
-}
-.artwork-preference select {
-  min-height: 44px;
-  padding: 8px 28px 8px 12px;
-  color: var(--ink);
-  background: var(--paper);
-  border: 1px solid var(--strong-rule);
-  border-radius: 0;
-}
-.artwork-preference > span {
-  color: var(--muted);
-}
 html[data-theme="dark"] .section-art {
   mix-blend-mode: normal;
-}
-html[data-artwork="original"] .section-art {
-  display: none;
-}
-html[data-artwork="original"] .original-footer-art,
-html[data-artwork="original"] .original-empty-icon {
-  display: block;
-}
-html[data-artwork="original"] .art-heading {
-  display: block;
-}
-html[data-artwork="original"] .art-heading .title-dot {
-  color: inherit;
-}
-html[data-artwork="original"] .model-lab .title-dot {
-  color: var(--accent);
 }
 @media (max-width: 650px) {
   .art-heading {
@@ -1535,9 +1493,6 @@ html[data-artwork="original"] .model-lab .title-dot {
   }
   .art-heading .section-art {
     width: 105px;
-  }
-  .new-footer-art {
-    max-width: 200px;
   }
 }
 .rail-jar-art {
@@ -1589,4 +1544,30 @@ html[data-theme="dark"] .save-button:hover svg,
 html[data-theme="dark"] .save-button:focus-visible svg,
 .bookmarks .save-button svg {
   color: var(--accent);
+}
+
+/* Give the wide crumb illustration a deliberate slot at every breakpoint. */
+@media (min-width: 981px) {
+  .footer {
+    grid-template-columns: clamp(300px, 28vw, 390px) minmax(0, 1fr) clamp(
+        260px,
+        27vw,
+        420px
+      );
+  }
+}
+@media (min-width: 651px) and (max-width: 980px) {
+  .footer > .new-footer-art {
+    grid-column: 1 / -1;
+    width: min(620px, 90%);
+    max-width: none;
+    margin: 28px 0;
+  }
+}
+@media (max-width: 650px) {
+  .footer > .new-footer-art {
+    width: min(480px, 100%);
+    max-width: none;
+    margin: 12px 0 24px;
+  }
 }

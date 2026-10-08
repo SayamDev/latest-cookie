@@ -70,26 +70,6 @@ function Cookie() {
   );
 }
 function App() {
-  const [artwork, setArtwork] = useState(() => {
-    try {
-      return localStorage.getItem("latest-cookie-artwork") !== "original";
-    } catch {
-      return true;
-    }
-  });
-  useEffect(() => {
-    document.documentElement.dataset.artwork = artwork
-      ? "illustrated"
-      : "original";
-    try {
-      localStorage.setItem(
-        "latest-cookie-artwork",
-        artwork ? "illustrated" : "original",
-      );
-    } catch {
-      /* Preference remains available for this visit. */
-    }
-  }, [artwork]);
   const [dailyData, setDailyData] = useState(daily);
   const [stories, setStories] = useState(() => validateStories(rawStories));
   const path = location.pathname.slice(base.length).replace(/^\/|\/$/g, "");
@@ -538,7 +518,6 @@ function App() {
                   {isSaved && !saved.length ? (
                     <>
                       <SectionArt kind="jar" className="empty-jar-art" />
-                      <Search className="original-empty-icon" size={32} />
                     </>
                   ) : (
                     <Search size={32} />
@@ -868,29 +847,7 @@ function App() {
               </a>
             </nav>
           </div>
-          <img
-            className="footer-art original-footer-art"
-            src={href("art/radial-art.jpg")}
-            alt=""
-            width="214"
-            height="143"
-            loading="lazy"
-          />
           <SectionArt kind="footer" className="new-footer-art" />
-        </div>
-        <div className="artwork-preference">
-          <label htmlFor="artwork-preference">Artwork</label>
-          <select
-            id="artwork-preference"
-            value={artwork ? "illustrated" : "original"}
-            onChange={(e) => setArtwork(e.target.value === "illustrated")}
-          >
-            <option value="illustrated">Illustrated</option>
-            <option value="original">Original design</option>
-          </select>
-          <span>
-            Choose the previous design anytime. Saved in this browser.
-          </span>
         </div>
         <div className="colophon">
           <span>© 2026 Sayam Ajmal · Latest Cookie</span>
