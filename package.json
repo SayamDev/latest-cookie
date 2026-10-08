@@ -7,13 +7,15 @@
     "dev": "vite --host 0.0.0.0",
     "build": "node --experimental-strip-types scripts/validate-content.mjs && tsc -b && vite build && node scripts/pages.mjs",
     "preview": "vite preview --host 0.0.0.0",
-    "test": "node --experimental-strip-types --test src/lib/*.test.ts",
+    "test": "node --experimental-strip-types --test src/lib/*.test.ts scripts/*.test.mjs",
     "test:e2e": "playwright test",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "update:daily": "node --experimental-strip-types scripts/update-daily.mjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "latest",
     "@fontsource/barlow-condensed": "^5.3.0",
+    "fast-xml-parser": "^5.11.2",
     "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
@@ -27,6 +29,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@vitejs/plugin-react": "latest",
+    "entities": "^8.1.0",
     "eslint": "^10.12.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.13.0",

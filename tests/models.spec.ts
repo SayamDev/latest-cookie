@@ -9,6 +9,9 @@ test("model filters, comparison, calculator and share links", async ({
     path: `docs/design/${info.project.name}-models.png`,
     fullPage: true,
   });
+  await page
+    .getByLabel("Pricing source", { exact: true })
+    .selectOption("Direct");
   await page.getByLabel("Provider", { exact: true }).selectOption("OpenAI");
   await page.getByLabel("Accepts input", { exact: true }).selectOption("Audio");
   await expect(
@@ -16,7 +19,7 @@ test("model filters, comparison, calculator and share links", async ({
   ).toBeVisible();
   await page.getByRole("button", { name: "Show all models" }).click();
   await page.getByLabel("Find a model").fill("gpt-4.1");
-  await expect(page.getByText("2 of 6 models", { exact: false })).toBeVisible();
+  await expect(page.getByText(/2 of \d+ models/)).toBeVisible();
   await page
     .getByRole("button", { name: "Compare GPT-4.1", exact: true })
     .click();
@@ -24,6 +27,9 @@ test("model filters, comparison, calculator and share links", async ({
     .getByRole("button", { name: "Compare GPT-4.1 mini", exact: true })
     .click();
   await page.getByRole("button", { name: "Reset filters" }).click();
+  await page
+    .getByLabel("Pricing source", { exact: true })
+    .selectOption("Direct");
   await page
     .getByRole("button", { name: "Compare Claude Opus 5.5", exact: true })
     .click();

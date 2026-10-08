@@ -1,14 +1,19 @@
 import { z } from "zod";
-const modelSchema = z.object({
-  id: z.string().regex(/^[a-z0-9.-]+$/),
+export const modelSchema = z.object({
+  id: z.string().regex(/^[a-zA-Z0-9._:/-]+$/),
   name: z.string().min(1),
-  provider: z.enum(["OpenAI", "Anthropic", "Google"]),
+  provider: z.string().min(1),
   inputPrice: z.number().nonnegative(),
   outputPrice: z.number().nonnegative(),
   context: z.number().int().positive(),
-  contextKind: z.enum(["Shared context", "Input limit"]),
-  maxOutput: z.number().int().positive(),
-  inputs: z.array(z.enum(["Text", "Image", "Audio", "Video"])).nonempty(),
+  contextKind: z.enum(["Shared context", "Input limit", "Router context"]),
+  maxOutput: z.number().int().positive().nullable(),
+  listedAt: z.iso.date().optional(),
+  estimateSupported: z.boolean().default(true),
+  route: z.enum(["Direct", "OpenRouter"]).default("Direct"),
+  inputs: z
+    .array(z.enum(["Text", "Image", "Audio", "Video", "File"]))
+    .nonempty(),
   docs: z.url().startsWith("https://"),
   pricing: z.url().startsWith("https://"),
   checked: z.iso.date(),
@@ -21,7 +26,7 @@ export function validateModels(raw: unknown): Model[] {
     throw new Error("Duplicate model ID");
   return models;
 }
-export type Sort = "input" | "output" | "name" | "context";
+export type Sort = "input" | "output" | "name" | "context" | "newest";
 export function findModels(
   models: Model[],
   query: string,
@@ -41,13 +46,16 @@ export function findModels(
     )
     .sort(
       (a, b) =>
-        (sort === "name"
-          ? a.name.localeCompare(b.name)
-          : sort === "context"
-            ? b.context - a.context
-            : sort === "input"
-              ? a.inputPrice - b.inputPrice
-              : a.outputPrice - b.outputPrice) || a.name.localeCompare(b.name),
+        (sort === "newest"
+          ? (b.listedAt || "").localeCompare(a.listedAt || "")
+          : sort === "name"
+            ? a.name.localeCompare(b.name)
+            : sort === "context"
+              ? b.context - a.context
+              : sort === "input"
+                ? a.inputPrice - b.inputPrice
+                : a.outputPrice - b.outputPrice) ||
+        a.name.localeCompare(b.name),
     );
 }
 // Aggregate text token volume; not a single request or an allowance.

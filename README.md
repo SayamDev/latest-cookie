@@ -26,7 +26,7 @@ The Pages workflow builds and deploys main. Enable GitHub Pages with GitHub Acti
 
 ## Privacy and limits
 
-No analytics, advertising or login for reading. Bookmarks and theme use localStorage in the current browser. GitHub hosts source/discussions and applies its own policies. There is no email subscription service. No live community counts are displayed. Content is manually curated, not automatically collected or published.
+No analytics, advertising or login for reading. Bookmarks and theme use localStorage in the current browser. GitHub hosts source/discussions and applies its own policies. There is no email subscription service. No live community counts are displayed. Editorial summaries are manually curated. The news desk and discovery feeds import public metadata daily. Video thumbnails request images from YouTube; there is no embedded player.
 
 ## Contribute
 
@@ -34,6 +34,18 @@ See CONTRIBUTING.md, COMMUNITY.md and ACCESSIBILITY.md. Code is MIT licensed. Or
 
 ## Model Lab
 
-`/models/` offers filters, price charts, a text-token cost calculator and comparisons of up to three models. Share this view creates a URL containing filters, selections and token volumes. Six manually checked models launch the catalogue, including earlier GPT-4.1 options; this is not an exhaustive latest-model leaderboard.
+`/models/` combines direct-provider references with a daily OpenRouter catalogue. Filters, incremental loading, charts, a text-token calculator and shareable comparisons keep the catalogue navigable. Newly listed means added to OpenRouter, not a verified launch date. Special service variants such as free and batch are excluded. Router listings use router rates; do not substitute these for direct-provider quotes. Tiered or per-request pricing disables estimates. Unknown output limits are shown as unavailable.
 
-Edit `src/data/models.json` only after checking the linked first-party specifications and pricing. Preserve the distinction between shared context and input limits. Rates use USD per million uncached text tokens on the standard paid tier. Cost estimates exclude tools, caching, special service tiers, taxes and regional modifiers. Refresh dates only after checking the sources. Build validates entries; `src/lib/models.test.ts` tests validation and calculation. No Artificial Analysis benchmark data is copied or integrated.
+Hugging Face supplies a separate platform-specific trending signal. Groq speed figures are dated provider-reported snapshots, not a global fastest-model leaderboard. No Artificial Analysis benchmark dataset is integrated.
+
+## Daily news and videos
+
+`/news/` imports publisher headlines from The Verge, Ars Technica, TechCrunch and WIRED. `/watch/` imports recent uploads and reported view counts from Marques Brownlee, Fireship, Computerphile and Two Minute Papers. Video topics are assigned by title/channel rules; they are not YouTube's personalized categories. Most viewed ranks lifetime views within the selected recent feed entries. Some feeds expose no counter; absence is not zero.
+
+Run `npm run update:daily` to fetch a snapshot. Sources are allowlisted in `scripts/feed-sources.mjs`; parsing, date validation, deduplication and last-good fallback are tested. Up to 12 headlines per outlet and 8 videos per channel are retained within 30 days. Article bodies and video descriptions are not copied. Source links take visitors to the publisher; subscriptions may apply.
+
+The Pages workflow runs daily at **06:17 UTC**, and can be started with `gh workflow run pages.yml`. Schedule times can be delayed by GitHub. Scheduled/manual builds fetch the latest published snapshot as fallback before updating, validate, test, build and deploy. Generated snapshots are deployed as `daily.json`; scheduled runs do not commit to the source repository. Source control carries a bootstrap snapshot. All-source failure fails the build, preserving the existing deployment; partial failures retain prior data with explicit stale status. Feed health shows last-successful timestamps, not just the latest attempt.
+
+This runs on GitHub, with no local desktop or API key required. GitHub can disable scheduled workflows in public repositories after 60 days without repository activity; maintainers must check Actions and re-enable if needed. The site marks data older than 48 hours. To change timing edit `.github/workflows/pages.yml`; use UTC.
+
+Verify: `npm test`, `npm run lint`, `npm run build`, `npm run test:e2e`. XML fixtures and catalogue fixtures cover malicious URLs, future dates, duplicate entries, absent counters, tiered costs and failed-source preservation.

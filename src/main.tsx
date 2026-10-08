@@ -24,6 +24,8 @@ import {
 } from "lucide-react";
 import "@fontsource/barlow-condensed/800.css";
 import "@fontsource-variable/dm-sans";
+import DailyPages, { DailyPreview, daily } from "./features/daily/DailyPages";
+import { validateDaily } from "./lib/daily";
 import ModelsPage from "./features/models/ModelsPage";
 import rawStories from "./data/stories.json";
 import briefings from "./data/briefings.json";
@@ -62,6 +64,7 @@ function Cookie() {
   );
 }
 function App() {
+  const [dailyData, setDailyData] = useState(daily);
   const [stories, setStories] = useState(() => validateStories(rawStories));
   const path = decodeURI(location.pathname)
     .slice(base.length)
@@ -108,11 +111,25 @@ function App() {
     setRefreshing(true);
     setFeedback("");
     try {
+      let dailyFailed = false;
+      try {
+        const dailyResponse = await fetch(href("daily.json"), {
+          cache: "no-store",
+        });
+        if (!dailyResponse.ok) throw new Error();
+        setDailyData(validateDaily(await dailyResponse.json()));
+      } catch {
+        dailyFailed = true;
+      }
       const response = await fetch(href("stories.json"), { cache: "no-store" });
       if (!response.ok) throw new Error();
       const updated = validateStories(await response.json());
       setStories(updated);
-      setFeedback("Published collection checked. You’re up to date.");
+      setFeedback(
+        dailyFailed
+          ? "Stories checked; news refresh failed. Current headlines remain available."
+          : "Published stories checked. The news desk shows the daily feed timestamps.",
+      );
     } catch {
       setFeedback(
         "Could not check for updates. Your current stories are still available.",
@@ -261,7 +278,19 @@ function App() {
         <span>Independent minds. Fresh perspectives.</span>
         <div>
           <a href={href()} aria-current={isHome ? "page" : undefined}>
-            Latest
+            Home
+          </a>
+          <a
+            href={href("news/")}
+            aria-current={path === "news" ? "page" : undefined}
+          >
+            News desk
+          </a>
+          <a
+            href={href("watch/")}
+            aria-current={path === "watch" ? "page" : undefined}
+          >
+            Watch
           </a>
           <a
             href={href("models/")}
@@ -339,7 +368,7 @@ function App() {
                 <RefreshCw size={14} className={refreshing ? "spinning" : ""} />
                 {refreshing ? "Checking…" : "Check for updates"}
               </button>
-              <p>Curated coverage, not a live feed.</p>
+              <p>Our summaries are curated. The news desk updates daily.</p>
             </div>
           </aside>
         )}
@@ -358,6 +387,7 @@ function App() {
                   )}
                 </div>
               )}
+              {homeDefault && <DailyPreview data={dailyData} />}
               {homeDefault && (
                 <div className="feature-area">
                   <article className="feature">
@@ -683,6 +713,8 @@ function App() {
                 </a>
               </div>
             </section>
+          ) : path === "news" || path === "watch" ? (
+            <DailyPages kind={path === "news" ? "news" : "videos"} />
           ) : path === "models" ? (
             <ModelsPage />
           ) : path === "about" ? (
@@ -719,8 +751,11 @@ function App() {
                   The initial summaries were drafted with AI assistance and
                   checked against the linked primary sources by the building
                   assistant. They have not had an independent human editorial
-                  review. Nothing is automatically published, and we do not
-                  manufacture quotes, benchmark results or community activity.
+                  review. The separate news desk, video feeds and OpenRouter
+                  model listings refresh automatically each day from public
+                  metadata. Imported headlines are not independently
+                  fact-checked. We do not manufacture quotes, benchmark results
+                  or community activity.
                 </p>
                 <h2>Corrections belong in the open.</h2>
                 <p>
@@ -736,8 +771,9 @@ function App() {
                   No analytics, advertising or account is required here.
                   Bookmarks and your theme preference stay in this browser’s
                   local storage. GitHub hosts the site and community under its
-                  own privacy policies. We do not use tracking cookies—despite
-                  the name.
+                  own privacy policies. The Watch page requests thumbnails from
+                  YouTube’s image service; videos open on YouTube. We do not use
+                  tracking cookies—despite the name.
                 </p>
                 <h2>Built in the open.</h2>
                 <p>
@@ -782,6 +818,8 @@ function App() {
               <a href={href()}>Latest stories</a>
               <a href={href("saved/")}>Saved stories</a>
               <a href={href("models/")}>Model Lab</a>
+              <a href={href("news/")}>News desk</a>
+              <a href={href("watch/")}>Tech videos</a>
               <a href={href("community/")}>Community</a>
             </nav>
             <nav aria-label="Publication information">

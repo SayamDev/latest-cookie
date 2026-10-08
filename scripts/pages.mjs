@@ -13,6 +13,8 @@ const escape = (s) =>
       ],
   );
 const routes = [
+  "news",
+  "watch",
   "models",
   "saved",
   "briefings",
@@ -45,6 +47,10 @@ for (const route of routes) {
   await writeFile("dist/" + route + "/index.html", html);
 }
 await writeFile("dist/404.html", template);
+await writeFile(
+  "dist/daily.json",
+  await readFile("src/data/daily.json", "utf8"),
+);
 await writeFile("dist/stories.json", JSON.stringify(stories));
 await writeFile(
   "dist/feed.xml",

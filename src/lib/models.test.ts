@@ -28,11 +28,11 @@ test("combined filters, sorting and empty results", () => {
   assert.equal(findModels(models, "", "OpenAI", "Audio", "input").length, 0);
   assert.equal(
     findModels(models, "", "All", "All", "input")[0].id,
-    "gemini-3.5-flash-lite",
+    "groq-gpt-oss-20b",
   );
   assert.equal(
     findModels(models, "", "All", "All", "output")[0].id,
-    "gpt-4.1-mini",
+    "groq-gpt-oss-20b",
   );
 });
 test("shared selections discard unknown and duplicate IDs and enforce the cap", () => {

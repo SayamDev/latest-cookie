@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, Check, Link, Plus, X } from "lucide-react";
+import { daily, stamp, FreshnessNotice } from "../daily/DailyPages";
+import ModelSignals from "./ModelSignals";
 import raw from "../../data/models.json";
 import {
   estimateCost,
@@ -10,7 +12,8 @@ import {
   type Model,
 } from "../../lib/models";
 import "./models.css";
-const models = validateModels(raw);
+const models = [...validateModels(raw), ...daily.models];
+const providers = [...new Set(models.map((m) => m.provider))].sort();
 const money = (n: number) =>
   new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -33,13 +36,17 @@ export default function ModelsPage() {
     params.get("modelQuery")?.slice(0, 100) || "",
   );
   const [provider, setProvider] = useState(
-    option("provider", ["OpenAI", "Anthropic", "Google"], "All"),
+    option("provider", providers, "All"),
   );
   const [input, setInput] = useState(
     option("input", ["Text", "Image", "Audio", "Video"], "All"),
   );
   const [sort, setSort] = useState(
-    option("sort", ["input", "output", "context", "name"], "input") as Sort,
+    option(
+      "sort",
+      ["input", "output", "context", "name", "newest"],
+      "newest",
+    ) as Sort,
   );
   const [selected, setSelected] = useState(() =>
     parseSelection(params.get("compare"), models),
@@ -50,9 +57,20 @@ export default function ModelsPage() {
     option("metric", ["cost", "input", "output"], "cost") as
       "cost" | "input" | "output",
   );
+  const [limit, setLimit] = useState(24);
+  const [route, setRoute] = useState(
+    option("route", ["Direct", "OpenRouter"], "All"),
+  );
   const [feedback, setFeedback] = useState("");
   const [shareUrl, setShareUrl] = useState("");
-  const visible = findModels(models, query, provider, input, sort);
+  const visible = findModels(
+    models.filter((m) => route === "All" || m.route === route),
+    query,
+    provider,
+    input,
+    sort,
+  );
+  const shown = visible.slice(0, limit);
   const comparing = selected.flatMap(
     (id) => models.find((m) => m.id === id) || [],
   );
@@ -67,7 +85,9 @@ export default function ModelsPage() {
         : m.outputPrice;
   const chart =
     valid || metric !== "cost"
-      ? [...visible].sort((a, b) => chartValue(a) - chartValue(b))
+      ? [...visible.slice(0, 8)]
+          .filter((m) => metric !== "cost" || m.estimateSupported)
+          .sort((a, b) => chartValue(a) - chartValue(b))
       : [];
   const maximum = Math.max(...chart.map(chartValue), 0);
   function toggle(id: string) {
@@ -90,6 +110,7 @@ export default function ModelsPage() {
       input,
       sort,
       metric,
+      route,
       compare: selected.join(","),
       in: inputTokens,
       out: outputTokens,
@@ -119,16 +140,23 @@ export default function ModelsPage() {
           <p>Know the trade-offs. Then build.</p>
         </div>
         <div className="lab-edition">
-          <strong>6 models / 3 providers</strong>
-          <span>Source check: 8 Oct 2026</span>
+          <strong>
+            {models.length} listings / {providers.length} model developers
+          </strong>
+          <span>Daily run: {stamp(daily.attemptedAt)}</span>
           <a href="#model-method">How to read this data</a>
         </div>
       </header>
+      <FreshnessNotice data={daily} kind="models" />
       <p className="lab-scope">
-        A starter catalogue of API prices and token limits. Search, shortlist
-        and price your workload. Manually checked snapshot; not a complete
-        market ranking.
+        Browse newly listed models and compare API costs. OpenRouter listings
+        refresh daily; direct-provider references retain their own checked
+        dates. Router rates are starting prices, not a direct-provider quote.
       </p>
+      <nav className="lab-signals-jump" aria-label="Model signals">
+        <a href="#model-signals">Trending & speed watch</a>
+        <a href="#catalogue">Browse catalogue</a>
+      </nav>
       <div className="lab-controls">
         <label className="lab-search">
           Find a model
@@ -136,7 +164,10 @@ export default function ModelsPage() {
             type="search"
             value={query}
             maxLength={100}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setLimit(24);
+            }}
             placeholder="Name or provider…"
           />
         </label>
@@ -145,10 +176,13 @@ export default function ModelsPage() {
           <select
             aria-label="Provider"
             value={provider}
-            onChange={(e) => setProvider(e.target.value)}
+            onChange={(e) => {
+              setProvider(e.target.value);
+              setLimit(24);
+            }}
           >
             <option>All</option>
-            {["OpenAI", "Anthropic", "Google"].map((p) => (
+            {providers.map((p) => (
               <option key={p}>{p}</option>
             ))}
           </select>
@@ -173,19 +207,36 @@ export default function ModelsPage() {
             value={sort}
             onChange={(e) => setSort(e.target.value as Sort)}
           >
+            <option value="newest">Newly listed first</option>
             <option value="input">Input price: low first</option>
             <option value="output">Output price: low first</option>
             <option value="context">Token limit: high first</option>
             <option value="name">Name: A–Z</option>
           </select>
         </label>
+        <label>
+          Pricing source
+          <select
+            aria-label="Pricing source"
+            value={route}
+            onChange={(e) => {
+              setRoute(e.target.value);
+              setLimit(24);
+            }}
+          >
+            <option>All</option>
+            <option>OpenRouter</option>
+            <option>Direct</option>
+          </select>
+        </label>
         <button
           className="button"
           onClick={() => {
+            setRoute("All");
             setQuery("");
             setProvider("All");
             setInput("All");
-            setSort("input");
+            setSort("newest");
           }}
         >
           Reset filters
@@ -211,7 +262,7 @@ export default function ModelsPage() {
           <p className="lab-caption">
             {metric === "cost"
               ? "Estimated text-token cost · USD · lowest first"
-              : "Standard text-token price · USD per million · lowest first"}
+              : "Starting text-token price · USD per million · lowest first"}
           </p>
           {chart.length ? (
             <ol className="lab-bars">
@@ -237,7 +288,9 @@ export default function ModelsPage() {
             </p>
           )}
           <p className="lab-caption">
-            Price does not measure quality. Test models on your own tasks.
+            Chart uses the first 8 matching catalogue entries. Tiered-price
+            entries are excluded from workload estimates. Price does not measure
+            quality.
           </p>
         </section>
         <section className="lab-calculator" aria-labelledby="calc-title">
@@ -295,7 +348,7 @@ export default function ModelsPage() {
       </div>
       <div className="lab-section-head lab-catalogue-head">
         <div>
-          <h2>The catalogue</h2>
+          <h2 id="catalogue">The catalogue</h2>
           <p className="lab-caption" aria-live="polite">
             {visible.length} of {models.length} models · Prices in USD per 1M
             text tokens
@@ -323,7 +376,7 @@ export default function ModelsPage() {
               </tr>
             </thead>
             <tbody>
-              {visible.map((m) => (
+              {shown.map((m) => (
                 <tr key={m.id} data-selected={selected.includes(m.id)}>
                   <td>
                     <button
@@ -344,10 +397,19 @@ export default function ModelsPage() {
                   </td>
                   <th scope="row">
                     <strong>{m.name}</strong>
-                    <span>{m.provider}</span>
+                    <span>
+                      {m.provider} · {m.route}
+                      {m.listedAt ? ` · Listed ${m.listedAt}` : ""}
+                    </span>
                   </th>
-                  <td>{money(m.inputPrice)}</td>
-                  <td>{money(m.outputPrice)}</td>
+                  <td>
+                    {!m.estimateSupported && "From "}
+                    {money(m.inputPrice)}
+                  </td>
+                  <td>
+                    {!m.estimateSupported && "From "}
+                    {money(m.outputPrice)}
+                  </td>
                   <td>
                     {number(m.context)}
                     <small>{m.contextKind}</small>
@@ -380,6 +442,16 @@ export default function ModelsPage() {
           >
             Show all models
           </button>
+        </div>
+      )}
+      {visible.length > limit && (
+        <div className="model-page-size">
+          <button className="button" onClick={() => setLimit((n) => n + 24)}>
+            Show 24 more models
+          </button>
+          <span>
+            {shown.length} of {visible.length} shown
+          </span>
         </div>
       )}
       <section className="lab-compare" aria-labelledby="compare-title">
@@ -454,12 +526,22 @@ export default function ModelsPage() {
               <tbody>
                 {[
                   ["Provider", (m: Model) => m.provider],
-                  ["Input / 1M tokens", (m: Model) => money(m.inputPrice)],
-                  ["Output / 1M tokens", (m: Model) => money(m.outputPrice)],
+                  [
+                    "Input / 1M tokens",
+                    (m: Model) =>
+                      (m.estimateSupported ? "" : "From ") +
+                      money(m.inputPrice),
+                  ],
+                  [
+                    "Output / 1M tokens",
+                    (m: Model) =>
+                      (m.estimateSupported ? "" : "From ") +
+                      money(m.outputPrice),
+                  ],
                   [
                     "Your estimated cost",
                     (m: Model) =>
-                      valid
+                      valid && m.estimateSupported
                         ? money(
                             estimateCost(
                               m,
@@ -467,13 +549,19 @@ export default function ModelsPage() {
                               Number(outputTokens),
                             ),
                           )
-                        : "Enter valid token volumes",
+                        : !m.estimateSupported
+                          ? "See source: tiered pricing"
+                          : "Enter valid token volumes",
                   ],
                   [
                     "Token limit",
                     (m: Model) => `${number(m.context)} · ${m.contextKind}`,
                   ],
-                  ["Max output tokens", (m: Model) => number(m.maxOutput)],
+                  [
+                    "Max output tokens",
+                    (m: Model) =>
+                      m.maxOutput === null ? "Not listed" : number(m.maxOutput),
+                  ],
                   ["Accepts", (m: Model) => m.inputs.join(", ")],
                   ["Notes", (m: Model) => m.note],
                   ["Last checked", (m: Model) => m.checked],
@@ -508,28 +596,32 @@ export default function ModelsPage() {
           </p>
         )}
       </section>
+      <ModelSignals />
       <section className="lab-method" id="model-method">
         <h2>Read the small print.</h2>
         <div>
           <p>
-            These are provider-published specifications, manually checked on 8
-            October 2026. This starter set includes earlier-generation GPT-4.1
-            models for existing applications. It is not exhaustive or
-            automatically refreshed; confirm current rates and availability at
-            the source.
+            OpenRouter metadata is fetched daily from its public models API.
+            “Newly listed” uses the router's creation date, not a verified
+            release date. Special service variants (including free and batch),
+            rolling aliases and non-text-output models are excluded.
+            Direct-provider reference entries were manually checked on 8 October
+            2026. Always check availability and endpoint pricing at the source.
           </p>
           <p>
-            “Shared context” covers input and output together. “Input limit” is
-            the provider’s separate input allowance. Maximum output is another
-            ceiling, not a promise that every input/output combination fits.
-            Providers count tokens differently; Claude’s 1M / 128K labels are
-            displayed as decimal token counts.
+            “Router context” is the advertised router limit; actual endpoint
+            limits can differ. “Shared context” covers input and output
+            together. “Input limit” is the provider’s separate input allowance.
+            Maximum output is another ceiling, not a promise that every
+            input/output combination fits. Providers count tokens differently;
+            Claude’s 1M / 128K labels are displayed as decimal token counts.
           </p>
           <p>
             Cost = (input tokens × input rate + output tokens × output rate) ÷
             1,000,000. The same token workload is only an approximation across
-            tokenizers. All entries here are hosted proprietary APIs with text
-            output.
+            tokenizers. All catalogue entries are hosted API listings with text
+            output, including open-weight model families. Tiered or per-request
+            prices require the source calculator.
           </p>
           <p>
             We have not independently measured intelligence, speed or latency.

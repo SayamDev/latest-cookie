@@ -3,6 +3,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    - cron: "17 6 * * *"
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,6 +21,9 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Refresh public feeds
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: npm run update:daily
       - run: npm run lint
       - run: npm test
       - run: npm run build

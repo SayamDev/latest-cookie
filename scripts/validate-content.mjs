@@ -10,3 +10,6 @@ const models = validateModels(
   JSON.parse(readFileSync("src/data/models.json", "utf8")),
 );
 console.log(`Validated ${models.length} source-linked models.`);
+
+import { validateDaily } from "../src/lib/daily.ts";
+validateDaily(JSON.parse(readFileSync("src/data/daily.json", "utf8")));

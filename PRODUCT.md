@@ -11,13 +11,13 @@ Delegated: React and TypeScript with static publication pages, a small client-si
 Developers, makers, open-source contributors and curious technology readers who want useful information immediately.
 
 ## Product Purpose
-A free public tech publication and gathering place with source-linked news, search, topic filters, browser-local bookmarks, briefings a community directory, and a source-linked model comparison lab.
+A free public tech publication and gathering place with source-linked news, search, topic filters, browser-local bookmarks, briefings, a community directory, and a source-linked model comparison lab.
 
 ## Brand Commitments
 Latest Cookie. Unique, techy, no generic AI-generated design or filler. Useful content on the first screen.
 
 ## Capabilities and Constraints
-Public GitHub source and public live website requested. No account needed to read. No invented engagement or stories. GitHub Discussions is the proposed community backend. No email subscription claims without a configured provider. Publication is editorially reviewed rather than automatic generated filler.
+Public GitHub source and public live website requested. No account needed to read. No invented engagement or stories. GitHub Discussions is the proposed community backend. No email subscription claims without a configured provider. Editorial summaries remain manually curated. The separate news desk, video feeds, model catalogue and popularity signals import public metadata daily with visible source and freshness information. No generated article filler.
 
 ## Product Principles
 - Immediate access to useful information.

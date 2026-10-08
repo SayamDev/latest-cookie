@@ -16,3 +16,5 @@ Latest Cookie targets WCAG 2.2 AA. This is not a claim of full conformance.
 Real screen-reader testing (VoiceOver, NVDA), 200% zoom, Safari/Firefox and user testing remain to be completed. Automated scans do not prove full accessibility. Reduced-motion styling disables the only authored animations. Local storage failures fall back to session-only state with a visible message.
 
 Report accessibility issues through GitHub Issues with the affected page, browser, assistive technology and expected behaviour. Do not include private information.
+
+Daily discovery additions: news search/outlet/window filters, video topics/order, expanded model source filters, tiered-price exclusions, incremental catalogue loading and stale-fetch preservation are included in the Chromium checks. Source tables/lists and video cards preserve semantic headings and links.
