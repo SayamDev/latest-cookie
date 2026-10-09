@@ -110,7 +110,7 @@ export default function BenchmarkExplorer() {
           : "API snapshot"}{" "}
         checked <time dateTime={snapshot.checked}>{snapshot.checked}</time>.{" "}
         {snapshot.mode === "snapshot"
-          ? "These benchmark figures are dated, not a live leaderboard. The API pricing catalogue below updates daily."
+          ? "These benchmark figures are dated, not a live leaderboard. The API pricing catalogue below updates hourly."
           : "Benchmark updates are attempted daily. The date shows the last successful refresh."}
       </p>
       {now - Date.parse(snapshot.checked) > 7 * 86400000 && (

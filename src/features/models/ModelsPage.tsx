@@ -145,7 +145,7 @@ export default function ModelsPage() {
           <strong>
             {models.length} listings / {providers.length} model developers
           </strong>
-          <span>Daily run: {stamp(daily.attemptedAt)}</span>
+          <span>Feed run: {stamp(daily.attemptedAt)}</span>
           <a href="#model-method">How to read this data</a>
         </div>
       </header>
@@ -153,7 +153,7 @@ export default function ModelsPage() {
       <FreshnessNotice data={daily} kind="models" />
       <p className="lab-scope">
         Browse newly listed models and compare API costs. OpenRouter listings
-        refresh daily; direct-provider references retain their own checked
+        refresh hourly; direct-provider references retain their own checked
         dates. Router rates are starting prices, not a direct-provider quote.
       </p>
       <nav className="lab-signals-jump" aria-label="Model signals">
@@ -604,7 +604,7 @@ export default function ModelsPage() {
         <h2>Read the small print.</h2>
         <div>
           <p>
-            OpenRouter metadata is fetched daily from its public models API.
+            OpenRouter metadata is fetched hourly from its public models API.
             “Newly listed” uses the router's creation date, not a verified
             release date. Special service variants (including free and batch),
             rolling aliases and non-text-output models are excluded.

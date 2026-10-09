@@ -29,9 +29,9 @@ Light and dark themes · Keyboard access · Responsive layouts · RSS · Origina
 
 | Content | Where it comes from | Update behaviour |
 | :--- | :--- | :--- |
-| News desk | The Verge, Ars Technica, TechCrunch, WIRED public feeds | Scheduled daily at **06:17 UTC**; timestamps show successful fetches. |
+| News desk | The Verge, Ars Technica, TechCrunch, WIRED public feeds | Scheduled hourly at **17 minutes past each hour (UTC)**; timestamps show successful fetches. |
 | Watch | Marques Brownlee, Fireship, Computerphile, Two Minute Papers | Daily public feed snapshots. Views rank selected videos, not global YouTube trends. |
-| API catalogue | OpenRouter plus checked direct-provider references | Router catalogue refreshes daily; direct references keep their own checked dates. |
+| API catalogue | OpenRouter plus checked direct-provider references | Router catalogue refreshes hourly; direct references keep their own checked dates. |
 | Benchmarks | Artificial Analysis, with links to each measured variant | Selected snapshot checked **8 October 2026**. Automatic refresh requires an optional API key. |
 | Curated stories | Source-linked, AI-assisted summaries | Edited separately; each story has publication and source-check dates. No automatic generated filler. |
 
@@ -106,3 +106,5 @@ Read the [security review](docs/security-review.md) for checked boundaries, hard
 Stories live in `src/data/stories.json`. Use an original HTTPS source, accurate dates and concise summaries; validate and review claims before publishing. Never copy full articles or invent results or activity.
 
 <div align="center"><sub>Small bites. A wider world.</sub></div>
+
+Publisher snapshots are refreshed on every main-branch deployment as well as the hourly schedule. Open pages check for a newer snapshot every five minutes and when returning to the tab. GitHub scheduling can be delayed. Homepage topic counts describe manually curated summaries, not imported headlines.

@@ -1,3 +1,4 @@
+import { usePublishedDaily } from "../../lib/usePublishedDaily";
 import { ArtHeading } from "../../components/SectionArt";
 import { useState } from "react";
 import { ArrowUpRight, Play, RefreshCw } from "lucide-react";
@@ -37,7 +38,7 @@ export function SourceStatus({ data, kind }: { data: Daily; kind?: string }) {
             : "Feed health & update times"}
       </summary>
       <p>
-        Scheduled daily at 06:17 UTC. Hosting queues can delay a run. Failed
+        Scheduled hourly at 17 minutes past the hour (UTC). Hosting queues can delay a run. Failed
         feeds retain their last good entries; times below record the last
         successful fetch.
       </p>
@@ -68,7 +69,7 @@ export function DailyPreview({ data = daily }: { data?: Daily }) {
       <div className="daily-heading-row">
         <div>
           <h2 id="daily-heading">Fresh from the news desk</h2>
-          <p>Publisher headlines · Daily updates</p>
+          <p>Publisher headlines · Hourly updates</p>
         </div>
         <a href={href("news/")}>
           All headlines <ArrowUpRight size={16} />
@@ -101,6 +102,7 @@ export function DailyPreview({ data = daily }: { data?: Daily }) {
 }
 export default function DailyPages({ kind }: { kind: "news" | "videos" }) {
   const [data, setData] = useState(daily);
+  usePublishedDaily(setData);
   const [now, setNow] = useState(() => Date.now());
   const [topic, setTopic] = useState("All");
   const [source, setSource] = useState("All");

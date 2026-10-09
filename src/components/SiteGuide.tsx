@@ -37,7 +37,7 @@ const sections = [
     art: "news",
     title: "Follow the story to its source.",
     copy: "Catch up with publisher headlines in the News desk, or explore our short, source-linked story summaries. Search and topics help you find your next rabbit hole.",
-    note: "Publisher feeds refresh daily. Each source shows its last successful check; curated summaries have their own dates.",
+    note: "Publisher feeds refresh hourly. Each source shows its last successful check; curated summaries have their own dates.",
     path: "news/",
     action: "Open the news desk",
   },

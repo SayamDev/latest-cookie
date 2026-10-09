@@ -11,6 +11,7 @@ test("daily news and topic-based video discovery", async ({ page }, info) => {
   await expect(
     page.getByRole("heading", { name: "THE NEWS DESK." }),
   ).toBeVisible();
+  await page.getByLabel("Published within").selectOption("30");
   await page.getByLabel("Outlet", { exact: true }).selectOption("The Verge");
   await expect(page.locator(".news-list article").first()).toContainText(
     "The Verge",
@@ -84,4 +85,22 @@ test("expanded catalogue handles tiered prices and source filters", async ({
   ).toBeVisible();
   await page.getByRole("button", { name: "Show 24 more models" }).click();
   await expect(page.getByText(/48 of \d+ shown/)).toBeVisible();
+});
+
+test("open homepage receives new published headlines automatically", async ({ page }) => {
+  await page.clock.install();
+  let checks = 0;
+  await page.route("**/daily.json", async (route) => {
+    const response = await route.fetch();
+    const data = await response.json();
+    checks++;
+    data.news[0].title = `Published headline update ${checks}`;
+    await route.fulfill({ json: data });
+  });
+  await page.goto("/");
+  await expect(page.getByRole("link", { name: "Published headline update 1", exact: true })).toBeVisible();
+  await page.clock.fastForward(5 * 60 * 1000);
+  await expect(page.getByRole("link", { name: "Published headline update 2", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Security", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Fresh from the news desk" })).toBeVisible();
 });

@@ -17,7 +17,7 @@ A free public tech publication and gathering place with source-linked news, sear
 Latest Cookie. Unique, techy, no generic AI-generated design or filler. Useful content on the first screen.
 
 ## Capabilities and Constraints
-Public GitHub source and public live website requested. No account needed to read. No invented engagement or stories. GitHub Discussions is the proposed community backend. No email subscription claims without a configured provider. Editorial summaries remain manually curated. The separate news desk, video feeds, model catalogue and popularity signals import public metadata daily with visible source and freshness information. No generated article filler.
+Public GitHub source and public live website requested. No account needed to read. No invented engagement or stories. GitHub Discussions is the proposed community backend. No email subscription claims without a configured provider. Editorial summaries remain manually curated. The separate news desk, video feeds, model catalogue and popularity signals import public metadata hourly with visible source and freshness information. No generated article filler.
 
 ## Product Principles
 - Immediate access to useful information.

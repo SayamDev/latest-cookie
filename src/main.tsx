@@ -1,3 +1,4 @@
+import { usePublishedDaily } from "./lib/usePublishedDaily";
 import {
   ArtHeading,
   SectionArt,
@@ -71,6 +72,7 @@ function Cookie() {
 }
 function App() {
   const [dailyData, setDailyData] = useState(daily);
+  usePublishedDaily(setDailyData);
   const [stories, setStories] = useState(() => validateStories(rawStories));
   const path = location.pathname.slice(base.length).replace(/^\/|\/$/g, "");
   const isHome = path === "";
@@ -358,7 +360,7 @@ function App() {
               </a>
             </div>
             <div className="freshness">
-              <span>Sources last checked</span>
+              <span>Curated sources checked</span>
               <strong>
                 {date(
                   stories.reduce(
@@ -375,7 +377,7 @@ function App() {
                 <RefreshCw size={14} className={refreshing ? "spinning" : ""} />
                 {refreshing ? "Checking…" : "Check for updates"}
               </button>
-              <p>Our summaries are curated. The news desk updates daily.</p>
+              <p>Topic counts cover curated summaries. Publisher headlines update hourly in the News Desk.</p>
             </div>
           </aside>
         )}
@@ -394,7 +396,7 @@ function App() {
                   )}
                 </div>
               )}
-              {homeDefault && <DailyPreview data={dailyData} />}
+              {isHome && <DailyPreview data={dailyData} />}
               {homeDefault && (
                 <div className="feature-area">
                   <article className="feature">
@@ -768,7 +770,7 @@ function App() {
                   checked against the linked primary sources by the building
                   assistant. They have not had an independent human editorial
                   review. The separate news desk, video feeds and OpenRouter
-                  model listings refresh automatically each day from public
+                  model listings refresh automatically each hour from public
                   metadata. Imported headlines are not independently
                   fact-checked. We do not manufacture quotes, benchmark results
                   or community activity.
