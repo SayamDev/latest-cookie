@@ -107,4 +107,4 @@ Stories live in `src/data/stories.json`. Use an original HTTPS source, accurate 
 
 <div align="center"><sub>Small bites. A wider world.</sub></div>
 
-Publisher snapshots are refreshed on every main-branch deployment as well as the hourly schedule. Open pages check for a newer snapshot every five minutes and when returning to the tab. GitHub scheduling can be delayed. Homepage topic counts describe manually curated summaries, not imported headlines.
+Publisher snapshots are refreshed on every main-branch deployment as well as the hourly schedule. Open pages check for a newer snapshot every five minutes and when returning to the tab. GitHub scheduling can be delayed. Homepage topic counts combine curated stories and incoming publisher headlines, deduplicated by URL. Publisher topics use transparent title matching; unmatched items remain in All as General tech.

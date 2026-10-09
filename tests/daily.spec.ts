@@ -98,9 +98,24 @@ test("open homepage receives new published headlines automatically", async ({ pa
     await route.fulfill({ json: data });
   });
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "Published headline update 1", exact: true })).toBeVisible();
+  await expect(page.locator(".daily-preview").getByRole("link", { name: "Published headline update 1", exact: true })).toBeVisible();
   await page.clock.fastForward(5 * 60 * 1000);
-  await expect(page.getByRole("link", { name: "Published headline update 2", exact: true })).toBeVisible();
+  await expect(page.locator(".daily-preview").getByRole("link", { name: "Published headline update 2", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Security", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Fresh from the news desk" })).toBeVisible();
+});
+
+ test("homepage topic counts include incoming publisher headlines", async ({ page }) => {
+  await page.route("**/daily.json", async route => {
+    const response = await route.fetch();
+    const data = await response.json();
+    data.news = [{ ...data.news[0], id: "topic-test", title: "OpenAI introduces a model", url: "https://www.wired.com/story/topic-test/" }];
+    await route.fulfill({ json: data });
+  });
+  await page.goto("/");
+  const ai = page.getByRole("button", { name: "AI & ML", exact: true });
+  await expect(ai).toContainText("2");
+  await ai.click();
+  await expect(page.getByRole("region", {name: "Latest publisher headlines"}).getByRole("link", {name: "OpenAI introduces a model"})).toBeVisible();
+  await expect(page.locator(".feed-heading")).toContainText("2 items");
 });

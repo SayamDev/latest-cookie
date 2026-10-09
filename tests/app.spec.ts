@@ -16,7 +16,10 @@ test("discovery, empty state, bookmarks, theme and direct story", async ({
       .first(),
   ).toBeVisible();
   await page.getByRole("button", { name: "Hardware", exact: true }).click();
+  await expect(page.getByRole("region", { name: "Latest publisher headlines" })).toBeVisible();
+  await page.getByRole("searchbox").fill("zzznomatchingstoryzzz");
   await expect(page.getByText("No stories here yet.")).toBeVisible();
+  await page.getByRole("searchbox").fill("");
   await page.getByRole("button", { name: "All", exact: true }).click();
   await page.getByRole("searchbox").fill("Ollama");
   await expect(

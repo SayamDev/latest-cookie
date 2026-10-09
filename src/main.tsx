@@ -1,3 +1,4 @@
+import { filterNews, newsTopic } from "./lib/news-topics";
 import { usePublishedDaily } from "./lib/usePublishedDaily";
 import {
   ArtHeading,
@@ -111,6 +112,9 @@ function App() {
     topic,
     isSaved ? saved : undefined,
   );
+  const incomingNews = dailyData.news.filter(item => !stories.some(story => story.url === item.url));
+  const filteredNews = isHome ? filterNews(incomingNews, query, topic) : [];
+  const resultCount = filtered.length + filteredNews.length;
   const homeDefault = isHome && !query && topic === "All";
   const lead = stories[0];
   const story = stories.find((s) => path === "stories/" + s.slug);
@@ -344,8 +348,8 @@ function App() {
                     {t}
                     <span>
                       {t === "All"
-                        ? stories.length
-                        : stories.filter((s) => s.topic === t).length}
+                        ? stories.length + (isHome ? incomingNews.length : 0)
+                        : stories.filter((s) => s.topic === t).length + (isHome ? filterNews(incomingNews, "", t).length : 0)}
                     </span>
                   </button>
                 );
@@ -377,7 +381,7 @@ function App() {
                 <RefreshCw size={14} className={refreshing ? "spinning" : ""} />
                 {refreshing ? "Checking…" : "Check for updates"}
               </button>
-              <p>Topic counts cover curated summaries. Publisher headlines update hourly in the News Desk.</p>
+              <p>Topic counts include publisher headlines and curated stories. Headlines refresh hourly; topics are matched automatically from titles. General tech appears under All.</p>
             </div>
           </aside>
         )}
@@ -500,8 +504,8 @@ function App() {
                   <h1>{query ? "Search results" : topic}</h1>
                 )}
                 <span aria-live="polite">
-                  {filtered.length}{" "}
-                  {filtered.length === 1 ? "story" : "stories"}
+                  {resultCount}{" "}
+                  {resultCount === 1 ? "item" : "items"}
                 </span>
                 {(query || topic !== "All") && (
                   <button
@@ -515,7 +519,21 @@ function App() {
                   </button>
                 )}
               </div>
-              {filtered.length === 0 ? (
+              {filteredNews.length > 0 && (
+                <section className="result-list" aria-label="Latest publisher headlines">
+                  <p>Publisher headlines · Newest first · Automatic topic matching</p>
+                  {filteredNews.slice(0, limit).map(item => (
+                    <article key={item.id}>
+                      <div>
+                        <span className="eyebrow">{newsTopic(item.title)} · {item.source}</span>
+                        <h2><a href={item.url}>{item.title} <ArrowUpRight size={17} /></a></h2>
+                        <p><time dateTime={item.published}>{new Date(item.published).toLocaleString("en-GB", { timeZone: "UTC" })} UTC</time> · Read at the original publisher</p>
+                      </div>
+                    </article>
+                  ))}
+                </section>
+              )}
+              {resultCount === 0 ? (
                 <div className="empty-state">
                   {isSaved && !saved.length ? (
                     <>
@@ -554,11 +572,11 @@ function App() {
                   {filtered.slice(5, limit).map(row)}
                 </section>
               )}
-              {filtered.length > limit && (
+              {(filtered.length > limit || filteredNews.length > limit) && (
                 <div className="load-more">
                   <button
                     className="button"
-                    onClick={() => setLimit(filtered.length)}
+                    onClick={() => setLimit(Math.max(filtered.length, filteredNews.length))}
                   >
                     <span className="chew-cookie">
                       <Cookie />
