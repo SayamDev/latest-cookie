@@ -520,19 +520,35 @@ function App() {
                 )}
               </div>
               {filteredNews.length > 0 && (
-                <section className="result-list" aria-label="Latest publisher headlines">
-                  <p>Publisher headlines · Newest first · Automatic topic matching</p>
-                  {filteredNews.slice(0, limit).map(item => (
-                    <article key={item.id}>
-                      <div>
-                        <span className="eyebrow">{newsTopic(item.title)} · {item.source}</span>
-                        <h2><a href={item.url}>{item.title} <ArrowUpRight size={17} /></a></h2>
-                        <p><time dateTime={item.published}>{new Date(item.published).toLocaleString("en-GB", { timeZone: "UTC" })} UTC</time> · Read at the original publisher</p>
-                      </div>
-                    </article>
-                  ))}
+                <section className="publisher-sections" aria-label="Latest publisher headlines">
+                  <p className="publisher-note">From the publishers · Topics matched from headlines · Newest first within each topic</p>
+                  {[...topics.slice(1), "General tech"].map(group => {
+                    const items = filteredNews.filter(item => newsTopic(item.title) === group);
+                    if (!items.length) return null;
+                    const expanded = topic === group;
+                    return (
+                      <section className="publisher-topic" key={group} aria-label={group + " headlines"}>
+                        <header className="publisher-topic-heading">
+                          <h2>{group}</h2><span>{items.length} headlines</span>
+                          {!expanded && items.length > 3 && <button className="text-button" onClick={() => setFilter(group)}>More in {group} <ArrowRight size={16} /></button>}
+                        </header>
+                        <div className="publisher-grid">
+                          {items.slice(0, expanded ? limit : 3).map(item => (
+                            <article key={item.id}>
+                              <a className="publisher-story" href={item.url}>
+                                <span className="publisher-source">{item.source}</span>
+                                <h3>{item.title} <ArrowUpRight size={16} aria-hidden="true" /></h3>
+                                <time dateTime={item.published}>{new Date(item.published).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "UTC" })} UTC</time>
+                              </a>
+                            </article>
+                          ))}
+                        </div>
+                      </section>
+                    );
+                  })}
                 </section>
               )}
+              {isHome && filtered.length > 0 && <div className="curated-heading"><h2>Curated reads</h2><p>Selected stories, with context and original sources.</p></div>}
               {resultCount === 0 ? (
                 <div className="empty-state">
                   {isSaved && !saved.length ? (
@@ -572,7 +588,7 @@ function App() {
                   {filtered.slice(5, limit).map(row)}
                 </section>
               )}
-              {(filtered.length > limit || filteredNews.length > limit) && (
+              {(filtered.length > limit || (topic !== "All" && filteredNews.length > limit)) && (
                 <div className="load-more">
                   <button
                     className="button"

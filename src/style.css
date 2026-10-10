@@ -1571,3 +1571,34 @@ html[data-theme="dark"] .save-button:focus-visible svg,
     margin: 12px 0 24px;
   }
 }
+
+/* Publisher sections follow the journal's ruled, warm-paper layout. */
+.publisher-sections { padding: 0 25px 32px; }
+.publisher-note { color: var(--muted); font-size: 12px; margin: 8px 0 28px; }
+.publisher-topic { margin-bottom: 36px; min-width: 0; }
+.publisher-topic-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; border-top: 3px solid var(--accent); padding: 16px 0; }
+.publisher-topic-heading h2 { font: 700 25px/1.2 Georgia, serif; margin: 0; }
+.publisher-topic-heading > span { color: var(--muted); font-size: 12px; }
+.publisher-topic-heading button { margin-left: auto; min-height: 44px; }
+.publisher-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border-bottom: 1px solid var(--rule); }
+.publisher-grid article + article { border-left: 1px solid var(--rule); }
+.publisher-story { color: var(--ink); display: flex; flex-direction: column; gap: 14px; height: 100%; padding: 22px; text-decoration: none; transition: none; }
+.publisher-source { font-size: 12px; font-weight: 700; }
+.publisher-story h3 { font: 700 22px/1.3 Georgia, serif; margin: 0; overflow-wrap: anywhere; }
+.publisher-story time { margin-top: auto; font-size: 11px; color: var(--muted); }
+.publisher-story:focus-visible, .news-list article:focus-within { background: var(--accent); color: #171a17; }
+.publisher-story:focus-visible time, .news-list article:focus-within .news-item-meta, .news-list article:focus-within .news-item-meta span { color: #171a17; }
+.curated-heading { padding: 26px 25px 20px; border-top: 2px solid var(--ink); }
+.curated-heading h2 { font: 700 26px/1.2 Georgia, serif; margin: 0 0 8px; }
+.curated-heading p { color: var(--muted); font-size: 13px; margin: 0; }
+@media (hover: hover) {
+ .publisher-story:hover, .news-list article:hover { background: var(--accent); color: #171a17; }
+ .publisher-story:hover time, .news-list article:hover .news-item-meta, .news-list article:hover .news-item-meta span { color: #171a17; }
+}
+@media (max-width: 980px) { .publisher-grid { grid-template-columns: 1fr; } .publisher-grid article + article { border-left: 0; border-top: 1px solid var(--rule); } }
+@media (max-width: 650px) {
+ .publisher-sections { padding: 0 0 24px; }
+ .publisher-topic-heading button { margin-left: 0; flex-basis: 100%; justify-content: flex-start; }
+ .publisher-story { padding: 20px 12px; }
+ .curated-heading { padding: 24px 0 20px; }
+}

@@ -119,3 +119,16 @@ test("open homepage receives new published headlines automatically", async ({ pa
   await expect(page.getByRole("region", {name: "Latest publisher headlines"}).getByRole("link", {name: "OpenAI introduces a model"})).toBeVisible();
   await expect(page.locator(".feed-heading")).toContainText("2 items");
 });
+
+test("topic sections expand and provide orange keyboard focus without mobile overflow", async ({ page }) => {
+  await page.goto("/");
+  const group = page.getByRole("region", { name: "General tech headlines", exact: true });
+  await expect(group.locator("article")).toHaveCount(3);
+  await group.getByRole("button", { name: "More in General tech" }).click();
+  await expect(group.locator("article")).toHaveCount(5);
+  const link = group.locator("a").first();
+  await page.keyboard.press("Tab");
+  await link.focus();
+  await expect(link).toHaveCSS("background-color", "rgb(255, 96, 41)");
+  await expect(page.locator("body")).toHaveJSProperty("scrollWidth", await page.evaluate(() => innerWidth));
+});
